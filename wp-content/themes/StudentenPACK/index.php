@@ -15,6 +15,7 @@
  */
 get_header(); ?>
 
+<div class="box">
 <?php if (have_posts()) : ?>
 
 	<?php while (have_posts()) : the_post(); ?>
@@ -32,5 +33,6 @@ get_header(); ?>
 olol, alles weg, gnihihi!
 
 <?php endif; ?>
+</div>
 
 <?php get_footer(); ?>

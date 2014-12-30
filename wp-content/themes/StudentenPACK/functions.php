@@ -6,7 +6,7 @@ if ( function_exists( 'add_theme_support' ) ) {
   
   add_image_size( 'featured-post', 636, 300, true ); 
   add_image_size( 'std-post', 150, 100, true );
-  add_image_size( 'sidebar', 300, 9999);
+  add_image_size( 'sidebar', 300, 300);
   add_image_size( 'frontpage-category', 324, 100, true );
 }
 
@@ -15,6 +15,15 @@ function my_excerpt_length($length) {
 return 20; }
 
 remove_filter('the_excerpt', 'wpautop');
+
+if ( function_exists('register_sidebar') )
+register_sidebar(array(
+'name'=>'frontpage',
+'before_widget' => '<div class="frontpage_column">',
+'after_widget' => '</div>',
+'before_title' => '<h2 class="smalltitle contentarea">',
+'after_title' => '</h2>',
+));
 
 function get_root_category($tmp)
 {
@@ -27,15 +36,15 @@ function get_root_category($tmp)
 }
 
 function TimeAgo($datefrom,$dateto=-1)
-{
-	//Zeitzone und Sommerzeit-Sensitivität aktivieren
-	date_default_timezone_set('Europe/Berlin'); 
-	
+{	
 	// Defaults and assume if 0 is passed in that
 	// its an error rather than the epoch
 
 	if($datefrom<=0) { return "A long time ago"; }
-	if($dateto==-1) { $dateto = time(); }
+	if($dateto==-1) { 
+		//Zeitzone und Sommerzeit-Sensitivität aktivieren
+		date_default_timezone_set('Europe/Berlin'); 
+		$dateto = date('U'); }
 
 	// Calculate the difference in seconds betweeen
 	// the two timestamps
@@ -137,7 +146,7 @@ function TimeAgo($datefrom,$dateto=-1)
 
 		case "d":
 			$datediff = floor($difference / 60 / 60 / 24);
-			$res = ($datediff==1) ? "gestern" : "$vor datediff Tagen";
+			$res = ($datediff==1) ? "gestern" : "vor $datediff Tagen";
 			break;
 	
 		case "ww":
@@ -160,7 +169,42 @@ function TimeAgo($datefrom,$dateto=-1)
 			$res = ($datediff==1) ? "vor einer Sekunde" : "vor $datediff Sekunden";
 			break;
 	}
-	return $res;
+	return (($datediff > 0) ? $res : date('j. F Y H:i:s',$datefrom));
 }
 
+function curPageURL() {
+ 	$pageURL = 'http';
+ 	if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+ 	$pageURL .= "://";
+ 	if ($_SERVER["SERVER_PORT"] != "80") {
+ 	 	$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+ 	} else {
+ 	 	$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+ 	}
+ return $pageURL;
+}
+
+function sidebar_comment($comment, $args, $depth) {
+	$GLOBALS['comment'] = $comment; ?>
+	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
+   		<div id="comment-<?php comment_ID(); ?>">
+    		<div class="comment-author avatar">
+        		<?php echo get_avatar($comment,$size='32',$default='<path_to_url>' ); ?>
+        	</div>
+        	<div class="comment-body smalltext">
+       		<p class="comment-text"><?php echo get_comment_author_link(); ?>: <?php echo get_comment_text() ?>
+       			<?php if ($comment->comment_approved == '0') : ?>
+           		<br />
+         		<em><?php _e('Your comment is awaiting moderation.') ?></em>
+      			<?php endif; ?>
+       		</p>
+      		<p class="comment-meta commentmetadata">
+      			<a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php printf(__('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','') ?> 
+      			| <?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+      		</p>
+      		</div>
+     	</div>
+<?php
+	//schließedes </li> wird automatisch ergänzt
+}
 ?>

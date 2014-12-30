@@ -1,7 +1,7 @@
 <?php if ( have_comments() ) : ?>
 <h2 class="smalltitle"><?php comments_number('Keine Kommentare', 'Ein Kommentar', '% Kommentare' );?></h2>
 <ul class="commentlist">
-	<?php wp_list_comments(); ?>
+	<?php wp_list_comments('callback=sidebar_comment'); ?>
 </ul>
 <div class="navigation">
 	<div class="alignleft"><?php previous_comments_link() ?></div>
