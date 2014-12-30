@@ -1,21 +1,43 @@
 <?php
+/**
+ * Diese Datei enthält eine Reihe von Funktionen, die Features des Themes umsetzen oder WordPress anpassen
+ */
 
+/**
+ * eine Reihe von Größen für Artikelbilder festlegen
+ */
 if ( function_exists( 'add_theme_support' ) ) { 
   add_theme_support( 'post-thumbnails' );
+  //existierendes Maß thumbnail umdefinieren
   set_post_thumbnail_size( 150, 100, true );
-  
+  //featured-post wird für die Titelstory auf der Startseite und für die Comicübersich verwendet
   add_image_size( 'featured-post', 636, 300, true ); 
+  //Standardgröße für Listen
   add_image_size( 'std-post', 150, 100, true );
+  //Kleine Heftcover für Sidebar und Heftarchiv. Man beachte das fehlende "true", es wird also nicht scharf zugeschnitten
   add_image_size( 'sidebar', 300, 300);
+  //Symbolbilder für die auf der Startseite gelisteten Hauptkategorien
   add_image_size( 'frontpage-category', 324, 100, true );
+  //Comicarchive benutzen diese Quadrate
+  add_image_size( 'square', 211, 211, true );
 }
 
+/**
+ * Anpassung der automatischen Excerptlänge. Excerpts werden in Listen verwendet, wenn es keine Zweittitel gibt
+ */
 add_filter('excerpt_length', 'my_excerpt_length');
 function my_excerpt_length($length) {
-return 20; }
+	return 20; 
+}
 
+/**
+ * Keine automatischen Absätze (<p>) in Excerpts
+ */
 remove_filter('the_excerpt', 'wpautop');
 
+/**
+ * Die untere Hälfte der Startseite ist mit Widgets im Dashboard gestaltbar und daher als sidebar definiert
+ */
 if ( function_exists('register_sidebar') )
 register_sidebar(array(
 'name'=>'frontpage',
@@ -25,6 +47,9 @@ register_sidebar(array(
 'after_title' => '</h2>',
 ));
 
+/**
+ * ausgehend von einer gegebenen Kategorie die Hauptkategorie bestimmen. 
+ */
 function get_root_category($tmp)
 {
 	$tmproot = $tmp[0]->category_parent; 
@@ -35,6 +60,10 @@ function get_root_category($tmp)
 	return $tmp;
 }
 
+/**
+ * Ausgabe von natürlichsprachlichen Zeitangaben
+ * http://www.sajithmr.me/php-time-ago-calculation
+ */
 function TimeAgo($datefrom,$dateto=-1)
 {	
 	// Defaults and assume if 0 is passed in that
@@ -172,6 +201,9 @@ function TimeAgo($datefrom,$dateto=-1)
 	return (($datediff > 0) ? $res : date('j. F Y H:i:s',$datefrom));
 }
 
+/**
+ * aktuelle URL abfragen. (Hier hinschreiben, wofür das gebraucht wird, sobald ich das wieder rausfinde!)
+ */
 function curPageURL() {
  	$pageURL = 'http';
  	if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
@@ -184,6 +216,110 @@ function curPageURL() {
  return $pageURL;
 }
 
+/**
+ * Diese Funktion baut die Autorenkurzprofile auf der Redaktionsübersicht.
+ * Parameter: BenutzerID, String für die Beschreibung, String für den Zeitraum
+ */
+function printAuthorProfile($id, $role, $date){
+	//Datenbankabfragen zusammenbauen
+	$parameters=array();
+	//erstmal nur normale Artikel
+	$parameters['post_type'] = array('post');
+	//eines Autors
+	$parameters['author'] = $id;
+	//alle "auf einer Seite" (werden hier nicht angezeigt, nur gezählt)
+	$parameters['nopaging'] = true;
+	$myquery= new WP_Query($parameters);
+    $posts=$myquery->posts;	
+    //das gleiche noch mal für Comics
+	$parameters['post_type'] = array('comic');    
+	$myquery= new WP_Query($parameters);
+	$comics=$myquery->posts;
+	echo '<div class="gallery_element">';
+	echo '<h2 class="smalltitle">';
+	//voller Name
+	echo get_the_author_meta('display_name', $id);
+	//Email, wenn es eine StudentenPACK Adresse ist
+	$email = get_the_author_meta('user_email',$id);
+	if(preg_match('/@studentenpack.uni-luebeck.de/', $email)){
+		echo '&nbsp;<a href="mailto:'.$email.'"><img src="'.get_bloginfo('template_directory').'/images/email16px.png" alt="email" /></a>';
+	} else {
+		//hier ist ein unsichtbares Dummy-Icon, damit sich die Textausrichtung nicht verschiebt, nur weil jemand keine Emailadresse hat...
+		echo '<img src="'.get_bloginfo('template_directory').'/images/dummy16px.png" width="16px" height="16px" alt="" />';
+	}
+	echo '</h2>';
+	echo '<p class="smalltext">'.$role.'</p>';
+	echo '<p class="smalltext">'.$date.'</p>';
+	if ((count($posts) == 0) && (count($comics) == 0)) {
+		//Wer keinen Artikel hat, hat keinen Artikel
+		echo '<p class="smalltext">'.get_the_author_meta('first_name', $id).' hat noch keinen Artikel geschrieben</p>';
+	} else {
+		//Anzahl Artikel und Comics ausgeben
+		echo '<p class="smalltext">';
+		echo '<a href="'.get_author_posts_url($id).'">';
+		if (count($posts) > 0) {
+			echo count($posts).' Artikel';
+		}
+		if ((count($posts) > 0) && (count($comics) > 0)){
+			echo ' und ';
+		}
+		if (count($comics) > 0) {
+			echo count($comics).' Comics';
+		}
+		echo' von '.get_the_author_meta('first_name', $id).'</a></p>';
+	}
+	echo '</div>';
+}
+
+/**
+ * Ööhhh..kein Plan, das stand wahrscheinlich mal irgendwo im Supportforum zum Mediacredit Plugin, das sowieso total im Eimer ist...
+ */
+add_shortcode('caption', 'img_caption_shortcode_mediacredit');
+function img_caption_shortcode_mediacredit($attr, $content = null) {
+    // New-style shortcode with the caption inside the shortcode with the link and image tags.
+    if ( ! isset( $attr['caption'] ) ) {
+        if ( preg_match( '#((?:<a [^>]+>\s*)?<img [^>]+>(?:\s*</a>)?)(.*)#is', $content, $matches ) ) {
+            $content = $matches[1];
+            $attr['caption'] = trim( $matches[2] );
+        }
+    }
+
+    // Allow plugins/themes to override the default caption template.
+    $output = apply_filters('img_caption_shortcode', '', $attr, $content);
+    if ( $output != '' )
+        return $output;
+
+    extract(shortcode_atts(array(
+        'id'    => '',
+        'align' => 'alignnone',
+        'width' => '',
+        'caption' => ''
+    ), $attr));
+
+    if ( 1 > (int) $width || empty($caption) )
+        return $content;
+
+    if ( $id ) $id = 'id="' . esc_attr($id) . '" ';
+
+    return '<div ' . $id . 'class="wp-caption ' . esc_attr($align) . '" style="width: ' . (10 + (int) $width) . 'px">'
+    . do_shortcode( $content ) . '<p class="wp-caption-text">' . do_shortcode( $caption ) . '</p></div>'; 
+}
+
+/**
+ * Suchergebnisse bekommen 20 Artikel auf eine Seite.
+ */
+add_filter('post_limits', 'postsperpage');
+function postsperpage($limits) {
+	if (is_search()) {
+		global $wp_query;
+		$wp_query->query_vars['posts_per_page'] = 20;
+	}
+	return $limits;
+}
+
+/**
+ * Irgendwas mit Kommentaren. Bestimmt wichtig... olol.
+ */
 function sidebar_comment($comment, $args, $depth) {
 	$GLOBALS['comment'] = $comment; ?>
 	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
@@ -207,4 +343,8 @@ function sidebar_comment($comment, $args, $depth) {
 <?php
 	//schließedes </li> wird automatisch ergänzt
 }
+
+
+
+
 ?>

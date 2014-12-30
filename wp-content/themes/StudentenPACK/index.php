@@ -1,22 +1,17 @@
 <?php
 /**
- * Theme Name: StudentenPACK
- * Theme URI: http://www.phibography.de/
- * Description: StudentenPACK Homepage
- * Author: Philipp Bohnenstengel
- * Author URI: http://www.phibography.de/
- * Version: 0.1 
- * Tags: 
- * 
- * License:
- * License URI:
- * 
- * General comments (optional).
+ * Default Template, wenn nichts anderes zugeordnet wird. Kommt glaub ich nicht vor...
  */
 get_header(); ?>
 
 <div class="box">
-<?php if (have_posts()) : ?>
+<?php 
+//Comics einbeziehen
+$parameters = ($wp_query->query_vars);
+$parameters['post_type'] = array('comic','post');
+query_posts($parameters);
+
+if (have_posts()) : ?>
 
 	<?php while (have_posts()) : the_post(); ?>
 	
@@ -30,7 +25,7 @@ get_header(); ?>
 	</div>
 <?php else: ?>
 
-olol, alles weg, gnihihi!
+<!-- olol, alles weg, gnihihi! -->
 
 <?php endif; ?>
 </div>

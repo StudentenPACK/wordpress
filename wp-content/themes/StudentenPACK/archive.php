@@ -1,24 +1,27 @@
 <?php
 /**
- * Theme Name: StudentenPACK
- * Theme URI: http://www.phibography.de/
- * Description: StudentenPACK Homepage
- * Author: Philipp Bohnenstengel
- * Author URI: http://www.phibography.de/
- * Version: 0.1 
- * Tags: 
- * 
- * License:
- * License URI:
- * 
- * General comments (optional).
+ * Dieses Template wird standardmäßig geladen, wenn ein Archiv angezeigt wird. Das betrifft Kategorien, Tags, Zeiträume, Autoren.
  */
 get_header(); ?>
 
 <div class="box">
-<?php if (have_posts()) : ?>
+<?php 
+//zusätzlich den post type comic berücksichtigen
+$parameters = ($wp_query->query_vars);
+$parameters['post_type'] = array('comic','post');
+//alles auf einer Seite anzeigen
+$parameters['nopaging'] = true;
+if(is_author()){
+//aus irgendwelchen Gründen funktioniert das mit den Coautoren nur richtig, wenn dieses Feld leer ist
+	$parameters['author_name'] = '';
+}
+//mit den modifizierten Parametern noch mal die Datenbankabfrage machen
+query_posts($parameters);
+if (have_posts()) : ?>
 <div class="archive_list">
-	<?php if (is_category()){
+	<?php 
+	//Verschiedene Überschriften für verschiedene Archivtypen. Bei Kategorien und Autoren RSS Link anzeigen
+	if (is_category()){
 		echo '<h1 class="page_title">';
 		single_cat_title('Rubrik: ', true);
 		echo '<a href="'.get_category_feed_link(get_query_var('cat')).'" title="Abonniere diese Rubrik"><img src="'.get_bloginfo('template_directory').'/images/rss.png" alt=""/></a>';
@@ -48,21 +51,20 @@ get_header(); ?>
 		echo '<h1 class="page_title">Archiv</h1>';
 	}	
 	?>
-	<?php while (have_posts()) : the_post(); ?>
+	<?php 
+	//hier werden die posts aufgelistet
+	while (have_posts()) : the_post(); ?>
 	
 		<?php include('postinlist.php'); ?>
 
 	<?php endwhile; ?>
-	
-		<p class="interaction_box">
-			<?php next_posts_link('ältere Artikel'); ?>
-			<?php previous_posts_link('neuere Artikel'); ?>
-		</p>
 </div>
 <div class="sidebar colorscheme_navi">
-	<?php if(is_category){
+	<?php 
+	//Verschiedene Archivtypen bekommen verschiedene Zusatzinfos zur Anzeige in der Sidebar
+	if(is_category){
 		$this_category = get_category($cat);
-		
+		//Kategorien zeigen eine Beschreibung (falls vorhanden) an
 		if($this_category->description != ""){
 			echo '<div class="sidebar-section">';
 			echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/description16px.png" alt="beschreibung"/> '.' Beschreibung</h2>';
@@ -71,6 +73,7 @@ get_header(); ?>
 			echo '</p>';
 			echo '</div>';
 		}
+		//Kategorien zeigen ihren Platz in der Kategorienhierarchie an, sofern sie keine Hauptkategorie sind
 		if($this_category->category_parent != 0){
 			echo '<div class="sidebar-section">';
 			echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/category16px.png" alt="hierarchie"/> '.' Hierarchie</h2>';
@@ -79,6 +82,7 @@ get_header(); ?>
 			echo '</p>';
 			echo '</div>';
 		}
+		//Kategorien zeigen Unterkategorien an, falls vorhanden
   		if (get_category_children($this_category->cat_ID) != "") {
     		echo '<div class="sidebar-section">';
 			echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/subcategory16px.png" alt="unterrubriken"/> '.' Unter-Rubriken</h2>';
@@ -90,15 +94,26 @@ get_header(); ?>
     	
 	}
 	if (is_author()){
+		//Autoren zeigen einen Beschreibungstext an (falls vorhanden)
 		if (get_the_author_meta('description', get_query_var('author')) != ""){
 			echo '<div class="sidebar-section">';
 			echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/author16px.png" alt="autor"/> '.' Bio</h2>';
-			echo '<div class="sidebar_avatar">'.get_avatar(get_query_var('author'),150).'</div>';
+			//echo '<div class="sidebar_avatar">'.get_avatar(get_query_var('author'),150).'</div>';
 			echo '<p class="smalltext">';
 			echo get_the_author_meta('description', get_query_var('author'));
 			echo '</p>';
+			
+		}
+		//Autoren, die eine StudentenPACK-Emailadresse haben, zeigen diese an
+		if (preg_match('/@studentenpack.uni-luebeck.de/', get_the_author_meta('user_email', get_query_var('author')))){
+			echo '<div class="sidebar-section">';
+			echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/email16px.png" alt="email"/> '.' Kontakt</h2>';
+			echo '<p class="smalltext">';
+			echo '<a href="mailto:'.get_the_author_meta('user_email', get_query_var('author')).'">'.get_the_author_meta('user_email', get_query_var('author')).'</a>';
+			echo '</p>';	
 			echo '</div>';
 		}
+		//Autoren, die eine eigene Homepage angegeben haben, zeigen diese an
 		if (get_the_author_meta('user_url', get_query_var('author')) != ""){
 			echo '<div class="sidebar-section">';
 			echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/www16px.png" alt="homepage"/> '.' Homepage</h2>';
@@ -109,10 +124,11 @@ get_header(); ?>
 		}
 	}
 	if(is_month()){
+		//Monate zeigen die zugehörige Ausgabe an
 		$year = get_the_time('Y');
 		$month = get_the_time('n');
-		//105 = Heftarchiv
-		$myquery= new WP_Query('cat=105&year='.$year.'&monthnum='.$month.'&order=DESC&posts_per_page=1');
+		//Gesucht wird ein post, der nicht das Tag "wahlausgabe" (327) hat, im der Kategorie Heftarchiv (105) ist, und Jahr und Monat des angezeigten Archivs hat.
+		$myquery= new WP_Query(array('tag__not_in' => array(327), 'cat' => 105, 'year' => $year, 'monthnum' => $month));
 		if ($myquery->have_posts()) :
 			echo '<div class="sidebar-section">';
 			echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/pdf16px.png" alt="pdf"/> '.' Das Heft</h2>';
@@ -126,29 +142,38 @@ get_header(); ?>
 		else: 
 
 		endif; 
+		//nach dieser zusätzlichen Datenbankabfrage soll alles wieder wie vorher sein
 		wp_reset_postdata();
 	}
 	echo '<div class="sidebar-section">';
-		echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/stats16px.png" alt="statistik"/> '.' Statistik</h2>';
-		echo '<p class="smalltext">';
-    		echo $wp_query->found_posts.' Artikel';
-    	echo '</p>';
-    	
+		//Alle Archive zeigen ein paar allgemeine Statistiken an
+    	//diese zusätzliche Abfrage stammt aus zeiten, als Archive noch in Seiten unterteilt waren und die Statistiken sonst nur für die erste Seite berechnet wurden, kann eventuell weg...
 		$parameters = ($wp_query->query_vars);
-    	$parameters['nopaging'] = true;
+    	$parameters['post_type'] = array('comic','post');
+		$parameters['nopaging'] = true;
        	$myquery= new WP_Query($parameters);
        	$posts=$myquery->posts;	
+		echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/stats16px.png" alt="statistik"/> '.' Statistik</h2>';
+		//Anzahl der Artikel in diesem Archiv
+		echo '<p class="smalltext">';
+    		echo sizeof($posts).' Artikel';
+    	echo '</p>';
+    	//Zeitraum der Artikel (außer es ist ein Monatsarchiv)
        	if((!is_month()) && (sizeof($posts)) > 1){
     		echo '<p class="smalltext">';
     		echo 'Zeitraum: '.get_the_time( 'j. F Y', ($posts[(sizeof($posts)) - 1]->ID)).' – '.get_the_time( 'j. F Y', ($posts[0]->ID));
 	    	echo '</p>';   
        	}
+       	//Liste der in diesem Archiv vertretenen Autoren (außer es ist ein Autorenarchiv)
        	if(!is_author()){
        		foreach($posts as $p){
+       			//sollte noch gegen Deaktivierung des Coauthors Plugins abgesichert werden
        			$tmp = get_coauthors($p->ID);
        			foreach ($tmp as $t){
+       				//1 ist der Admin Account "StudentenPACK"
        				if ($t->ID != 1){
-       					$authors[] = $t->display_name;
+       					//eventuell könnte man statt einem Link zum Autorenarchiv irgendwie eine Filterfunktion für das aktuelle Archiv implementieren. Aber das ist irgendwie kompliziert.
+       					$authors[] = '<a href="'.get_author_posts_url($t->ID).'">'.$t->display_name.'</a>';
        				}
        			}
        		}
@@ -163,15 +188,17 @@ get_header(); ?>
     			echo '</li></p>'; 
    			}
        	}
+       	//nach dieser zusätzlichen Datenbankabfrage soll alles wieder wie vorher sein
     	wp_reset_postdata();
     echo '</div>';
     	
 	
 	?>
 </div>
-<?php else: ?>
+<?php 
+else: ?>
 
-olol, alles weg, gnihihi!
+<!-- olol, alles weg, gnihihi! -->
 
 <?php endif; ?>
 </div>

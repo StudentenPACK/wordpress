@@ -7,10 +7,8 @@ Description: Widgets für die StudentenPACK Homepage
 Author: Philipp Bohnenstengel
 Author URI: http://www.phibography.de/
 */
-?>
 
-<?php
-/* Excerpt */
+/* Excerpt, wird für die Kolumne auf der Startseite verwendet */
 
 class ExcerptWidget extends WP_Widget {
 	
@@ -20,16 +18,14 @@ class ExcerptWidget extends WP_Widget {
  	}
  
   	function form($instance) {
- 	   $instance = wp_parse_args( (array) $instance, array( 'category' => '' ) );
- 	   $category = $instance['category']
+ 	    $instance = wp_parse_args( (array) $instance, array( 'category' => '' ) );
+ 	    $category = $instance['category']
 ?>
  		<p>
  			<label for="<?php echo $this->get_field_id('category'); ?>">Rubrik (ID): 
  				<input class="widefat" id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>" type="text" value="<?php echo attribute_escape($category); ?>" />
  			</label>
  		</p>
-
-
 <?php
 	}
  
@@ -70,10 +66,9 @@ class ExcerptWidget extends WP_Widget {
  
 }
 
-add_action( 'widgets_init', create_function('', 'return register_widget("ExcerptWidget");') );?>
+add_action( 'widgets_init', create_function('', 'return register_widget("ExcerptWidget");') );
 
-<?php
-/* Rubrik */
+/* Rubrik, in der unteren Hälfte der Startseite werden aus den Hauptrubriken die aktuellsten Posts dargestellt */
 
 class RubrikWidget extends WP_Widget {
 	function RubrikWidget() {
@@ -90,8 +85,6 @@ class RubrikWidget extends WP_Widget {
  				<input class="widefat" id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>" type="text" value="<?php echo attribute_escape($category); ?>" />
  			</label>
  		</p>
-
-
 <?php
 	}
  
@@ -113,7 +106,11 @@ class RubrikWidget extends WP_Widget {
 	    }
 
     	// WIDGET CODE GOES HERE
-		query_posts('cat='.$instance['category'].'&posts_per_page=5'); 
+    	$parameters = array();
+    	$parameters['post_type'] = array('comic','post');
+    	$parameters['cat'] = $instance['category'];
+    	$parameters['posts_per_page'] = 5;
+		query_posts($parameters); 
 		$loopcounter = 0; 
 		if (have_posts()) {
 			while (have_posts()) {

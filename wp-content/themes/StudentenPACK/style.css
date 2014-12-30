@@ -31,16 +31,26 @@
  *		dunkel:	#4B0070
  *		hell:	#6D00A3
  */ 
- 
+
+/**
+ * sollte im aktuellen Code nicht mehr vorkommen, hat dafür gesorgt, 
+ * dass ich nicht vergesse Platzhalter etc wieder zu entfernen
+ */
 .devcomment{
 	color: red;
 }
 
+/**
+ * ganz hinterster Hintergrund. 
+ */
 html{
-	height: 100%;
+	height: 100%; /* bin mir nicht mehr ganz sicher, wofür das wichtig war, aber es war. */
 	background-color: #eeeeee;
 }
- 
+
+/**
+ * Der eigentliche body. beschränkt auf 1024px, zentriert
+ */
 body{
 	font-family: Helvetica, Arial, Sans-serif;
 	width: 1024px;
@@ -48,6 +58,9 @@ body{
 	height: 100%;
 }
 
+/**
+ * nochmal ein div außen rum. Hielt ich wohl für ne gute Idee
+ */
 #container{
 	position: relative;
 	height:auto !important; /* real browsers */
@@ -56,76 +69,9 @@ body{
 	background-color: #ffffff;
 }
 
-#content{
-//	padding-bottom: 60px; //Footer schützen, bei Bedarf anpassen
-}
-
-#fb-user{
-	font-size: 0.8em;
-}
-
-#footer{
-	text-align: center;
-	border-top: 2px solid #000000; 
-	position: absolute;
-	bottom: 0;
-	width:100%;
-}
-
-#frontpage_ad{
-	width: 324px;
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 10px;
-}
-
-#frontpage_ad img{
-	vertical-align: middle;
-	outline: 1px solid #eeeeee;
-	padding: 12px;
-}
-
-#frontpage_calendar{
-	width: 324px;
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 10px;
-}
-
-#frontpage_content_bottom{
-	margin: 15px 11px 0px 11px;
-}
-
-
-#frontpage_content_middle{
-	margin: 15px 15px 0px 15px;
-}
-
-#frontpage_content_top{
-}
-
-#frontpage_kolumne{
-	width: 324px;
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 10px;
-}
-
-#frontpage_news{
-	width: 636px;
-	display: inline-block;
-	margin: 0px 15px 0px 15px;
-}
-
-#frontpage_sidebar{
-	width: 325px;
-	display: inline-block;
-	vertical-align: top;
-	background-color: #fdfdfd;
-	border: 1px solid #eeeeee;
-	margin-right: 15px;
-	padding: 5px;
-}
+/**
+ * Header, beinhaltet das Logo, Menü usw.
+ */
 
 #header{
 	height:190px;
@@ -141,18 +87,25 @@ body{
 	text-decoration:none;
 }
 
+/**
+ * Das sind die Icons und Links oben rechts
+ */
+
 #header_icons {
     height: 32px;
-    line-height: 2;
+    line-height: 1;
     position: absolute;
     text-align: right;
     right: 9px;
     top: 10px;
-    //width: 250px;
 }
 
 #header_icons img{
 	border: 0px;
+}
+
+#header_icons p{
+	margin: 0px;
 }
 
 #logo{
@@ -166,7 +119,10 @@ body{
 }
 
 
-/* Menu Principal */
+/**
+ * Das Mouseover-Hauptmenü
+ * Code größtenteils von http://wpstyles.org/uncategorized/create-wordpress-dropdown-menu-with-css/
+ */
 #menubar li a, #menubar li a:visited {
 	text-align: center;
 	display: block;
@@ -210,9 +166,12 @@ body{
 #menubar li li li:hover ul, #menubar li li li.hover ul {visibility: visible;}
 
 #menubar li {
-	float: left;
+	float: left; /* immer links */
 }
-#menubar li ul li {float: none;
+
+/* Schattenwurf */
+#menubar li ul li {
+	float: none;
 	-moz-box-shadow: 0px 5px 5px #888888;
 	-webkit-box-shadow: 5px 5px 5px #888888;
 	box-shadow: 5px 5px 5px #888888;
@@ -223,6 +182,11 @@ body{
 #menubar ul{
 	padding: 0px;
 	list-style:none;
+}
+
+#menubar ul.children ul.children{
+	margin-left: 100%;
+	margin-top: -30px;
 }
 
 .menubar_color li.cat-item{
@@ -242,6 +206,7 @@ body{
 	background-color: #666666;
 }
 
+/* ab hier werden die Farben definiert (siehe oben) */
 .menubar_color.campus li.cat-item{
 	border-bottom: 2px solid #0088A3;
 }
@@ -335,9 +300,12 @@ ul#menubar_toplevel{
 	background-color: #000000;
 }
 
+/**
+ * Das Suchfeld
+ */
 li#search{
 	line-height: 34px;
-	float: right;
+	float: right; /*immer rechts*/
 	padding-right: 9px;
 	padding-left: 9px;
 	width: 35%;
@@ -355,11 +323,91 @@ input#searchsubmit{
 	background-color: #fdfdfd;
 }
 
-#slider{
-	outline: 1px solid #eeeeee;
-	margin-top: 10px;
+/**
+ * Alles zwischen Header und Footer ist in content
+ */
+#content{
+/*	padding-bottom: 60px; */ /* Footer schützen, bei Bedarf anpassen, wird anscheinend nicht mehr gebraucht */
 }
 
+.box_footer{
+	padding-bottom: 60px; /* Footer schützen, bei Bedarf anpassen */
+}
+
+/**
+ * Der Footer ist alles unter der untersten Linie: Impressum, Kudos, Admin-Links
+ */
+#footer{
+	text-align: center;
+	border-top: 2px solid #000000; 
+	position: absolute;
+	bottom: 0;
+	width:100%;
+}
+
+/**
+ * Ab hier Elemente auf der Startseite
+ */
+
+/* Dies beinhaltet die Aktuellen Artikel und die Sidebar. Aus Gründen keinerlei css */
+#frontpage_content_top{
+}
+
+/* die Übersicht der aktuellsten Artikel */
+#frontpage_news{
+	width: 636px;
+	display: inline-block;
+	margin: 0px 15px 0px 15px;
+}
+
+/* Die aktuelle Titelstory wird prominent dargestellt */
+.featured-post{
+/*	outline: 1px solid #eeeeee; */
+	padding-bottom: 7px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.featured-post img{
+	//position: relative;
+	//z-index: -2;
+}
+
+.featured-post_title{
+	width: 636px;
+	height: 300px;
+	margin-top: -300px;
+	margin-bottom: 5px;
+	position: relative;
+	//z-index: -1;
+	outline: 1px solid #eeeeee;
+}
+
+.featured-post_title h1{
+	bottom: 0;
+	position: absolute;
+	margin: 0px 0px 0px 0px;
+	padding: 10px 5px 5px 5px;
+	background-color: #000000;
+	width: 626px;
+	opacity: 0.7;
+	font-weight: normal;
+	font-size: 2em;
+	color: #ffffff;
+}
+
+
+/* die Sidebar mit Gastartikelllink, Blogpost, Toplisten, Tagcloud */
+#frontpage_sidebar{
+	width: 325px;
+	display: inline-block;
+	vertical-align: top;
+	background-color: #fdfdfd;
+	border: 1px solid #eeeeee;
+	margin-right: 15px;
+	padding: 5px;
+}
+
+/* Toplisten */
 #sidebar-popularposts h2{
 	font-size: 0.8em;
 	margin: 0px;
@@ -372,6 +420,81 @@ input#searchsubmit{
 	margin-bottom: 10px;
 }
 
+/* Dies ist alles zwischen frontpage_top und footer */
+#frontpage_content_bottom{
+	margin: 15px 11px 0px 11px;
+}
+
+/* ich glaub, diese category Dinger gibt's gar nicht mehr */
+.frontpage_category{
+	width: 324px;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 10px;
+}
+
+.frontpage_category img{
+	outline: 1px solid #eeeeee;
+	border: 0px;
+}
+
+.frontpage_category_spacer{
+	width: 2px;
+	display: inline-block;
+}
+
+/* Die Dinger auf der Startseite unten sind alle ungefähr gleich */
+
+.frontpage_column{
+	width: 324px;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.frontpage_column a img{
+	-moz-box-shadow: 0px 0px 3px #666666;
+	-webkit-box-shadow: 0px 0px 3px #666666;
+	box-shadow: 0px 0px 3px #666666;
+	border: 1px solid #eeeeee;	
+}
+
+
+/* die kleine Version der Deadline */
+#frontpage_calendar{
+	width: 324px;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 10px;
+}
+
+/* der Kolumnen Teaser */
+#frontpage_kolumne{
+	width: 324px;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 10px;
+}
+
+/*Die "Rückseite" */
+#frontpage_ad{
+	width: 324px;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 10px;
+}
+
+#frontpage_ad img{
+	vertical-align: middle;
+	outline: 1px solid #eeeeee;
+	padding: 12px;
+}
+
+/**
+ * Die Sitemap ist das letzte Element vor dem Footer. Ein- und ausklappbar
+ */
 #sitemap{
 	background-color: #fdfdfd;
 	border: 1px solid #666666;
@@ -418,12 +541,32 @@ input#searchsubmit{
 	text-decoration: none;
 }
 
-.archive_list{
-	width: 636px;
+/* Dies sind die Spalten in der Sitemap */
+.sitemap-block{
+	width: 23%;
 	display: inline-block;
-	margin-right: 15px;
+	vertical-align: top;
+	margin:0% 0.7% 0% 0.7%;
+	margin-top: 5px;
 }
 
+.sitemap-block li img{
+	vertical-align: top;
+	border: 0px;
+}
+
+.sitemap-block ul{
+	list-style: none;
+	padding-left: 20px;
+	line-height: 1.5em;
+}
+
+
+/**
+ * Elemente, die auf Artikelseiten sind
+ */
+
+ /* Der Hauptteil mit Titel und Text */
 .article{
 	display: inline-block;
 	width:636px;
@@ -431,6 +574,24 @@ input#searchsubmit{
 	margin-right: 15px;
 }
 
+/* Zweittitel */
+.article-subtitle{
+	font-size: 1.2em;
+	line-height: 1.2em;
+	padding: 0px 0px 20px 0px;
+	margin: 0px;
+}
+
+/* Titel */
+.article-title{
+	font-weight:100;
+	font-size:2.2em;
+	padding: 0px 0px 15px 0px;
+	margin: 0px;
+	clear: both;
+}
+
+/* Text */
 .article-body{
 	font-family: Georgia, Palatino, Times, Serif;
 	font-size: 1.1em;
@@ -439,6 +600,7 @@ input#searchsubmit{
 	margin: 0px;
 }
 
+/* manchmal gibt es Infoboxen, z.B. mit Bestellinfo für Bücher */
 .article-infobox{
 	background-color: #ffe3d5;	
 }
@@ -452,224 +614,34 @@ input#searchsubmit{
 	padding: 0px 10px 10px 10px;
 }
 
-.article-subtitle{
-	font-size: 1.2em;
-	line-height: 1.2em;
-	padding: 0px 0px 20px 0px;
-	margin: 0px;
-}
-
-.article-title{
-	font-weight:100;
-	font-size:2.2em;
-	padding: 0px 0px 15px 0px;
-	margin: 0px;
-}
-
-.box{
-	margin: 15px 15px 0px 15px;
-}
-
-.box_footer{
-	padding-bottom: 60px; //Footer schützen, bei Bedarf anpassen
-}
-
-.colorscheme_navi a:link, .colorscheme_navi a:visited{
-	color: #666666;
-	text-decoration: none;
-}
-
-.colorscheme_navi a:hover{
-	color: #B30021;	
-	text-decoration: underline;
-}
-
-.colorsquare{
-	display: inline-block;
-	width: 12px;
-	height: 12px;
-	vertical-align: middle;
-	margin-right: 2px;
-	background-color: #000000;
-}
-
-.colorsquare.thumbnail{
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	margin: 0;
-	border-top: 2px solid #ffffff;
-	border-right: 2px solid #ffffff;
-	margin-bottom: 4px;
-}
-
-.colorsquare.anderswo{
-	background-color: #00A31B;
-}
-
-.colorsquare.campus{
-	background-color: #0088A3;
-}
-
-.colorsquare.lubeck{
-	background-color: #E02500;
-}
-
-.colorsquare.unterhaltung{
-	background-color: #6D00A3;
-}
-
-.colorsquare.wissen{
-	background-color: #A30036;
-}
-
-.comment-form-author, .comment-form-email, .comment-form-url{
-//	display:none;
+/* Bildbeschriftungen */
+.wp-caption-text{
 	font-size: 0.8em;
-}
-
-.comment-form-author, .comment-form-email, .comment-form-url{
-//	display:none;
-	font-size: 0.8em;
-}
-
-.comment-notes{
-	display: none;
-}
-
-.contentarea a:link, .contentarea a:visited{
-	text-decoration: none;
-	color: #000000;
-}
-
-.contentarea a:hover{
-	color: #b50022;	
-	text-decoration: underline;
-}
-
-.descriptiontext{
-	line-height: 1.3em;
-}
-
-.featured-post{
-//	outline: 1px solid #eeeeee;
-	padding-bottom: 7px;
+	font-family: Helvetica, Arial, Sans-serif;
+	font-style: italic;
+	margin: 5px 0px 15px 0px;
+	padding-bottom: 5px;
 	border-bottom: 1px solid #eeeeee;
 }
 
-.featured-post img{
-	//position: relative;
-	//z-index: -2;
-}
-
-.featured-post_title{
-	width: 636px;
-	height: 300px;
-	margin-top: -300px;
-	margin-bottom: 5px;
-	position: relative;
-	//z-index: -1;
-	outline: 1px solid #eeeeee;
-}
-
-.featured-post_title h1{
-	bottom: 0;
-	position: absolute;
-	margin: 0px 0px 0px 0px;
-	padding: 10px 5px 5px 5px;
-	background-color: #000000;
-	width: 626px;
-	opacity: 0.7;
-	font-weight: normal;
-	font-size: 2em;
-	color: #ffffff;
-}
-
-.frontpage_category{
-	width: 324px;
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 10px;
-}
-
-.frontpage_category img{
-	outline: 1px solid #eeeeee;
-	border: 0px;
-}
-
-.frontpage_category_spacer{
-	width: 2px;
-	display: inline-block;
-}
-
-.frontpage_column{
-	width: 324px;
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 10px;
-	margin-left: 5px;
-	margin-right: 5px;
-}
-
-.frontpage_column a img{
-	-moz-box-shadow: 0px 0px 3px #666666;
-	-webkit-box-shadow: 0px 0px 3px #666666;
-	box-shadow: 0px 0px 3px #666666;
-	border: 1px solid #eeeeee;	
-}
-
-.fulltext a:link, .fulltext a:visited{
-	color: #b50022;	
-	text-decoration: underline;
-}
-
-.full_width_div{
-	margin:0px 10px 20px 10px;
-}
-
-.gallery{
-}
-
-.gallery_element{
-	width:211px;
-	margin: 17px;
-	display: inline-block;	
-}
-
-.gallery_element img{
-	-moz-box-shadow: 0px 0px 3px #666666;
-	-webkit-box-shadow: 0px 0px 3px #666666;
-	box-shadow: 0px 0px 3px #666666;
-	border: 0px;
-}
-
-.gallery_element img:hover{
-	-moz-box-shadow: 0px 0px 10px #666666;
-	-webkit-box-shadow: 0px 0px 10px #666666;
-	box-shadow: 0px 0px 10px #666666;
-}
-
-.interaction_box{
-	background-color: #fdfdfd;
-	border: 1px solid #666666;
-	padding: 5px;
-	text-align: center;
-	vertical-align: middle;
-	font-family: Helvetica, Arial, sans-serif;
+.article-body .media-credit, .article-body .media-credit-dd {
 	font-size: 0.8em;
+	line-height: 1.2em; /*11px*/
+	text-align: right;
+	margin: 3px 5px;
+	display: block;
+	color: #666666;
 }
 
-.interaction_box a:link, .interaction_box a:visited{
-	color: #b50022;	
-	text-decoration: none;
+.article-body .media-credit-container {
+	text-align: left;
 }
 
-.interaction_box a:hover{
-	text-decoration: underline;
-}
-
+/**
+ * Elemente, die auf Pages sind
+ */
 .page_frame{
-	width: 650px;
+	/*width: 800px;*/
 	margin: auto;
 	background-color: #fdfdfd;
 	border: 1px solid #eeeeee;
@@ -679,6 +651,7 @@ input#searchsubmit{
 	box-shadow: 0px 0px 3px #666666;
 }
 
+/* Bearbeitungsdatum */
 p.page_modified{
 	font-size: 0.75em;
 	font-family: Helvetica, Arial, sans-serif;
@@ -687,11 +660,13 @@ p.page_modified{
 	margin: 0px;
 }
 
+/* Titel */
 .page_title{
 	font-weight:100;
 	font-size:2.2em;
 	padding: 0px 0px 15px 0px;
 	margin: 0px;
+	clear: both;
 }
 
 .page_title img{
@@ -699,69 +674,45 @@ p.page_modified{
     vertical-align: sub;
 }
 
-.post_in_list{
-	padding: 7px 0px 7px 0px;
-	border-bottom: 1px solid #eeeeee;
-}
+/**
+ * Dinge, die Archivseiten und so sind (auch wenn manche davon "page" im Namen haben)
+ */
 
-.post_in_list.even{
-	//background-color: #fdfdfd;
-}
-
-p.post_in_list_description{
-	margin: 0px 0px 5px 0px;
-}
-
-p.post_in_list_meta{
-	margin: 0px;
-	color: #666666;
-}
-.post_in_list_meta img{
-	vertical-align: sub;
-}
-
-.post_in_list_text{
+.archive_list{
+	width: 636px;
 	display: inline-block;
-	vertical-align: top;
-	width: 475px;
-}
-.post_in_list_thumbnail{
-	display: inline;
-	margin: 0px 5px 0px 0px;
-	position: relative;
-//	z-index: -1;
+	margin-right: 15px;
 }
 
-.post_in_list_thumbnail a img{
-	outline: 1px solid #eeeeee;
-	border: 0px;
-	-moz-box-shadow: 0px 0px 0px #ffffff;
-	-webkit-box-shadow: 0px 0px 0px #ffffff;
-	box-shadow: 0px 0px 0px #ffffff;
+/* Autor, Datum */
+.page_title_author_date{
+	font-size: 1.0em;
+	font-weight:lighter;
+	display: inline-block;
+	float:right;
 }
 
-.post_in_list_thumbnail a{
-	margin:0px;
-	padding:0x;
+.page_title_author_date a:link, .page_title_author_date a:visited{
+	text-decoration: none;
+	color: #000000;
 }
 
-.post_in_list_title{
-	font-size: 1.2em;
-	font-weight: normal;
+/* Hierarchie */
+.page_title_hierarchy{
+	font-size: 1.0em;
+	font-weight:lighter;
+	display: inline-block;
+	float:left;
 }
 
-h1.post_in_list_title{
-	margin: 0px 0px 5px 0px;
+.page_title_hierarchy a:link, .page_title_hierarchy a:visited{
+	text-decoration: none;
+	color: #000000;
 }
 
-p.post_smallinfo{
-	margin: 5px 0px 5px 0px;
-	border-bottom: 1px solid #eeeeee;
-}
-
-.post_smallinfo_time{
-	color: #666666;
-}
+/**
+ * Artikel und Archive haben eine Sidebar
+ */
 
 .sidebar{
 	display: inline-block;
@@ -773,6 +724,7 @@ p.post_smallinfo{
 	background-color: #fdfdfd;
 }
 
+/* Artikelkommentare sind in der Sidebar */
 .sidebar textarea#comment{
 	width: 315px;
 }
@@ -871,23 +823,43 @@ p.post_smallinfo{
 	line-height:1.4em;
 }
 
-.sitemap-block{
-	width: 23%;
-	display: inline-block;
-	vertical-align: top;
-	margin:0% 0.7% 0% 0.7%;
-	margin-top: 5px;
+
+/**
+ * Allgemeine Elemente, die immer mal wieder verwendet werden
+ */
+
+/* ein Abstandsrahmen, der auf Seiten undso */
+.box{
+	margin: 15px 15px 0px 15px;
 }
 
-.sitemap-block li img{
-	vertical-align: top;
-	border: 0px;
+/* Links in manchen Texten sind so... */
+.contentarea a:link, .contentarea a:visited{
+	text-decoration: none;
+	color: #000000;
 }
 
-.sitemap-block ul{
-	list-style: none;
-	padding-left: 20px;
-	line-height: 1.5em;
+.contentarea a:hover{
+	color: #b50022;	
+	text-decoration: underline;
+}
+
+/* ...aber in richtigen Texten sind sie rot */
+
+.fulltext a:link, .fulltext a:visited{
+	color: #b50022;	
+	text-decoration: underline;
+}
+
+/* Links in Navigationselementen haben andere Farben als Links in Texten */
+.colorscheme_navi a:link, .colorscheme_navi a:visited{
+	color: #666666;
+	text-decoration: none;
+}
+
+.colorscheme_navi a:hover{
+	color: #B30021;	
+	text-decoration: underline;
 }
 
 .smallarticle_title{
@@ -927,94 +899,259 @@ p.post_smallinfo{
 	vertical-align: sub;
 }
 
-.wp-caption-text{
-	font-size: 0.8em;
-	font-family: Helvetica, Arial, Sans-serif;
-	font-style: italic;
-	margin: 5px 0px 15px 0px;
-	padding-bottom: 5px;
+/* In Artikellisten gibt es Farbböbbel für die Hauptkategorien*/
+.colorsquare{
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	vertical-align: middle;
+	margin-right: 2px;
+	background-color: #000000; /* Defaultfarbe schwarz */
+}
+
+.colorsquare.thumbnail{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	margin: 0;
+	border-top: 2px solid #ffffff;
+	border-right: 2px solid #ffffff;
+	margin-bottom: 4px;
+}
+
+.colorsquare.anderswo{
+	background-color: #00A31B;
+}
+
+.colorsquare.campus{
+	background-color: #0088A3;
+}
+
+.colorsquare.lubeck{
+	background-color: #E02500;
+}
+
+.colorsquare.unterhaltung{
+	background-color: #6D00A3;
+}
+
+.colorsquare.wissen{
+	background-color: #A30036;
+}
+
+.post_in_list{
+	padding: 7px 0px 7px 0px;
 	border-bottom: 1px solid #eeeeee;
 }
 
-/* Plugins und so */
-
-/* amr-ical */
-
-.article-body .ical div.allday{
-	display: none;
+.post_in_list.even{
+	//background-color: #fdfdfd;
 }
 
-.article-body .ical .amrcol1, .article-body .ical .amrcol2{
-	vertical-align: top;
-} 
-
-.article-body .ical .amrcol1{
-	width: 80px;
+p.post_in_list_description{
+	margin: 0px 0px 5px 0px;
 }
 
-.article-body .ical .starttime, .article-body .ical .endtime, .article-body .ical .location, .article-body .ical .map{
-	display: inline;
+p.post_in_list_meta{
+	margin: 0px;
+	color: #666666;
 }
-
-.article-body .ical .map .amr-bling{
-	float: none;
+.post_in_list_meta img{
 	vertical-align: sub;
 }
 
-.article-body .ical .history{
+.post_in_list_text{
+	display: inline-block;
+	vertical-align: top;
+	width: 475px;
+}
+.post_in_list_thumbnail{
+	display: inline;
+	margin: 0px 5px 0px 0px;
+	position: relative;
+//	z-index: -1;
+}
+
+.post_in_list_thumbnail a img{
+	outline: 1px solid #eeeeee;
+	border: 0px;
+	-moz-box-shadow: 0px 0px 0px #ffffff;
+	-webkit-box-shadow: 0px 0px 0px #ffffff;
+	box-shadow: 0px 0px 0px #ffffff;
+}
+
+.post_in_list_thumbnail a{
+	margin:0px;
+	padding:0x;
+}
+
+.post_in_list_title{
+	font-size: 1.2em;
+	font-weight: normal;
+}
+
+h1.post_in_list_title{
+	margin: 0px 0px 5px 0px;
+}
+
+p.post_smallinfo{
+	margin: 5px 0px 5px 0px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.post_smallinfo_time{
 	color: #666666;
 }
 
-.article-body .ical tr.today{
-   color: #B50022;
-}
+/**
+ * Kommentardinge
+ */
 
-.frontpage_column .ical ul{
-	padding-left: 0px;
-	margin: 0px;
-}
-
-.frontpage_column .ical ul li{
-	list-style: none;
-	background-color: #fdfdfd;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	padding: 5px;
+.comment-form-author, .comment-form-email, .comment-form-url{
+/*	display:none; */
 	font-size: 0.8em;
-	line-height: 1.4em;
-	border: 1px solid #eeeeee;
 }
 
-.frontpage_column .ical ul li a:link, .frontpage_column #events_wrap .ical ul li a:visited{
-	color: #666666;
+.comment-notes{
+	display: none;
+}
+
+#fb-user{
+	font-size: 0.8em;
+}
+
+/**
+ * Interactionboxes werden für Navigationselemente etc verwendet. Manchmal. z.B. nächste/vorherige Seite
+ */
+.interaction_box{
+	background-color: #fdfdfd;
+	border: 1px solid #666666;
+	padding: 5px;
+	text-align: center;
+	vertical-align: middle;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 0.8em;
+}
+
+.interaction_box a:link, .interaction_box a:visited{
+	color: #b50022;	
 	text-decoration: none;
 }
 
-.frontpage_column .ical ul li a:hover{
-	color: #B30021;	
+.interaction_box a:hover{
 	text-decoration: underline;
 }
 
-.frontpage_column .ical ul li.odd{
-	background-color: #ffffff;
+.interaction_box #comment{
+	width:100%;
 }
 
-.frontpage_column .ical ul li.today{
-	color: #B50022;
+.interaction_box #respond{
+	text-align:left;
 }
 
-
-/* media credit */
-
-.article-body .media-credit, .article-body .media-credit-dd {
-	font-size: 0.8em;
-	line-height: 1.2em; /*11px*/
-	text-align: right;
-	margin: 3px 5px;
-	display: block;
-	color: #666666;
+.interaction_box.sharebuttons .twitter-share-button, .interaction_box.sharebuttons .fb_share{
+	vertical-align: bottom;
 }
 
-.article-body .media-credit-container {
+/**
+ * Heftarchive und Comicgalerien und so sind hier gestaltet
+ */
+
+.gallery .cat_description{
+	margin: 17px;
+}
+
+.gallery_element{
+	width:211px;
+	margin: 17px;
+	display: inline-block;	
+}
+
+.gallery_element img{
+	-moz-box-shadow: 0px 0px 3px #666666;
+	-webkit-box-shadow: 0px 0px 3px #666666;
+	box-shadow: 0px 0px 3px #666666;
+	border: 0px;
+}
+
+.gallery_element img:hover{
+	-moz-box-shadow: 0px 0px 10px #666666;
+	-webkit-box-shadow: 0px 0px 10px #666666;
+	box-shadow: 0px 0px 10px #666666;
+}
+
+/**
+ * Seiten mit sehr wenig Schnickschnack drum rum, z.B. einzelne Comics, heißen hier showroom. Warum auch immer.
+ */
+
+.showroom.article{
+	width:994px;
+}
+
+/* Inhalt */
+.showroom .article-body{
+	margin-left:auto;
+	margin-right:auto;
+	width:750px;
+	text-align:center;
+}
+
+/* das hier sind die Dinge auf der Comic Übersichtsseite */
+.showroom_block{
+	padding-top: 20px;
+	text-align:center;
+}
+
+.showroom_block .featured-post{
+	border-bottom: 0px;
+	margin:auto;
+	display: inline-block;
+}
+
+.showroom_block .featured-post_title{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.showroom_block .featured-post_description{
+	display: inline-block;
+	width: 300px;
+	vertical-align: top;
 	text-align: left;
+	padding: 10px;
+	background: #EEEEEE;
+	height:280px;
+	outline: 1px solid #EEEEEE;
+}
+
+/* Bedienelemenete */
+.showroom .navi_prev_link{
+	position: relative;
+	left: 10px;
+}
+
+.showroom .navi_next_link{
+	position: relative;
+	right: 10px;
+}
+
+/* Die Redaktionsseite ist eine gute Redaktionsseite */
+
+#redaktion p{
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
+#redaktion .gallery_element{
+	vertical-align:top; 
+	width: 160px;
+}
+
+#redaktion img{
+	border: none;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	vertical-align: sub;
 }

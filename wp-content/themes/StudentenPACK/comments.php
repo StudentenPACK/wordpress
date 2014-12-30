@@ -1,4 +1,8 @@
-<?php if ( have_comments() ) : ?>
+<?php 
+/**
+ * Dieses Template zeigt Kommentare an. Sollte mal überarbeitet werden...
+ */
+if ( have_comments() ) : ?>
 <h2 class="smalltitle"><?php comments_number('Keine Kommentare', 'Ein Kommentar', '% Kommentare' );?></h2>
 <ul class="commentlist">
 	<?php wp_list_comments('callback=sidebar_comment'); ?>
