@@ -1,0 +1,39 @@
+/**
+ * Theme Name: StudentenPACK
+ * Theme URI: http://www.phibography.de/
+ * Description: StudentenPACK Homepage
+ * Author: Philipp Bohnenstengel
+ * Author URI: http://www.phibography.de/
+ * Version: 0.1 
+ * Tags: 
+ * 
+ * License:
+ * License URI:
+ * 
+ * General comments (optional).
+ */
+
+#header{
+	width: 90%;
+	height:200px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-bottom: 2px solid #000000; /*debug*/
+	text-align: left;
+	margin: auto;
+}
+
+#logo{
+	background: url('images/logo.png') no-repeat bottom center;
+	height: 150px;
+	width: 500px;
+	align: left;
+	border:1px solid red; /*debug*/
+	display: inline-block;
+	vertical-align: top;
+}
+
+#pagelinks{
+	display: inline-block;
+	vertical-align: top;
+}
