@@ -326,7 +326,7 @@ function alter_query($query) {
 	//gets the global query var object
 	global $wp_query;
 
-	if(!$query->is_page() && $query->is_main_query()) {
+	if(!is_admin() && !$query->is_page() && $query->is_main_query()) {
 		//Comics einbeziehen
 		$query-> set('post_type' ,array('comic','post'));
 		if($query->is_home()) {
