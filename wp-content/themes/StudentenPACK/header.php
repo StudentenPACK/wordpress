@@ -55,17 +55,17 @@
 			</a>
 		</p>
 		<p>
-			<a href="http://www.studentenpack.uni-luebeck.de/index.php/deadline/" title="Deadline: Der Terminkalender">
+			<a href="/index.php/deadline/" title="Deadline: Der Terminkalender">
 				Deadline <img src="<?php bloginfo('template_directory'); ?>/images/calendar24px.png" alt="calendar"/>
 			</a>
 		</p>		
 		<p>
-			<a href="http://www.studentenpack.uni-luebeck.de/index.php/category/blog/heftarchiv/" title="Alte Ausgaben als PDF herunterladen">
+			<a href="/index.php/category/blog/heftarchiv/" title="Alte Ausgaben als PDF herunterladen">
 				Heftarchiv <img src="<?php bloginfo('template_directory'); ?>/images/pdf24px.png" alt="archiv"/>
 			</a>
 		</p>
 		<p>
-			<a href="http://www.studentenpack.uni-luebeck.de/index.php/die-redaktion/" title="Wer macht eigentlich diese Zeitung?">
+			<a href="/index.php/die-redaktion/" title="Wer macht eigentlich diese Zeitung?">
 				Redaktion <img src="<?php bloginfo('template_directory'); ?>/images/author24px.png" alt="team"/>
 			</a>
 		</p>		

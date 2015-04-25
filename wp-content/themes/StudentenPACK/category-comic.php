@@ -6,11 +6,6 @@ get_header(); ?>
 
 <div class="box">
 <?php 
-//comics abfragen
-$parameters = ($wp_query->query_vars);
-$parameters['post_type'] = array('comic','post');
-query_posts($parameters);
-
 if (have_posts()) : ?>
 	<?php 
 	if (is_category()){
@@ -32,32 +27,41 @@ if (have_posts()) : ?>
     		$comics = get_categories('child_of='.$this_category->cat_ID);
     		foreach ($comics as $com) {
     			//für jede Comicserie den aktuellsten Comis abfragen
-				query_posts(array('cat' => ($com->cat_ID), 'posts_per_page' => 1 , 'post_type' => array('comic','post'))); 
+    			//posts_per_page = -1 tut das was nopaging irgendwie hier nicht tut O.o
+    			$myquery = new WP_Query(array('cat' => ($com->cat_ID), 'posts_per_page' => -1, 'post_type' => array('comic','post')));
 
-				if (have_posts()) {
-					while (have_posts()) {
-					the_post();
-					echo '<div class="showroom_block">';
-						//hier wird das gleiche Design verwendet wie auf der Startseite für die aktuelle Titelstory 
-						echo '<div class="featured-post">';
-							the_post_thumbnail('featured-post');
-							echo '<a href="'.get_category_link( $com->cat_ID ).'"><div class="featured-post_title contentarea">';
-								//Zeitraum berechnen
-								$parameters = ($wp_query->query_vars);
-	   							$parameters['nopaging'] = true;
-	      						$myquery= new WP_Query($parameters);
-	       						$posts=$myquery->posts;	
-				    			$range= get_the_time( 'Y', ($posts[(sizeof($posts)) - 1]->ID)).' – '.get_the_time( 'Y', ($posts[0]->ID));
-					    		wp_reset_postdata();
-								echo '<h1>'.$com->name.': '.$com->count.' Folge'.((($com->count) != 1) ? 'n' : '').' ('.$range.')</h1>';
-							echo '</div></a>';
-						echo '</div>';
+				if ($myquery->have_posts()) {
+					//es gibt html dinge, die nur beim ersten post gemacht werden
+					$counter = 1;
+					//variablen für das neueste und älteste vorbereiten
+					$newestYear;
+					$oldestYear;
+					while ($myquery->have_posts()) {
+						$myquery->the_post();
+						//block anfang mit bild nur beim ersten durchlauf
+						if ($counter == 1) {
+							//aktuellstes Jahr merken
+							$newestYear = get_the_time('Y');
+							echo '<div class="showroom_block">';
+								//hier wird das gleiche Design verwendet wie auf der Startseite für die aktuelle Titelstory 
+								echo '<div class="featured-post">';
+									the_post_thumbnail('featured-post');
+									echo '<a href="'.get_category_link( $com->cat_ID ).'"><div class="featured-post_title contentarea">';
+						}
+						//Zeitraum aktualisieren
+						$oldestYear = get_the_time('Y');
+						//counter hochzählen
+			    		$counter++;
+					}
+					//nach der Schleife das restliche html, in das nun auch die Jahreszahlen eingetragen werden
+										echo '<h1>'.$com->name.': '.$com->count.' Folge'.((($com->count) != 1) ? 'n' : '').' ('.$oldestYear.' - '.$newestYear.')</h1>';
+								echo '</div></a>';
+							echo '</div>';
 						//Anzeige des Beschreibungstexts
 						echo '<div class="featured-post_description smalltext">';
 							echo $com->description;
 						echo '</div>';
 		       		echo '</div>';
-					}				
 				} else {}
 
 				rewind_posts();

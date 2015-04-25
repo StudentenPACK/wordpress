@@ -318,6 +318,40 @@ function postsperpage($limits) {
 }
 
 /**
+ * standard query erweitern und so...
+ * http://presscustomizr.com/snippet/three-techniques-to-alter-the-query-in-wordpress/
+ */
+
+function alter_query($query) {
+	//gets the global query var object
+	global $wp_query;
+
+	if(!$query->is_page() && $query->is_main_query()) {
+		//Comics einbeziehen
+		$query-> set('post_type' ,array('comic','post'));
+		if($query->is_home()) {
+			//Die Kategorie Blog enthält Heftankündigungen etc und wird gesondert dargestellt
+			$query-> set('cat',-104);
+			//Diese Zahl modifizieren, falls was am Layout geändert wird und mehr oder weniger Platz ist
+			$query-> set('posts_per_page',9);
+		}
+		//Archive sind Kategorieseiten, Autorenseiten etc. Dort alle Posts auf einer Seite anzeigen
+		elseif (is_archive()) {
+			$query-> set('nopaging', true);
+			if(is_category('heftarchiv')) {
+				//im Haupt-Heftarchiv nicht die Hefte in den Unterkategorien anzeigen
+				$query->set('category__not_in', array(524, 896, 897, 898, 937, 948));
+			}
+		}
+
+
+		//we remove the actions hooked on the '__after_loop' (post navigation)
+		// remove_all_actions ( '__after_loop');
+	}
+}
+add_action('pre_get_posts','alter_query');
+
+/**
  * Irgendwas mit Kommentaren. Bestimmt wichtig... olol.
  */
 function sidebar_comment($comment, $args, $depth) {

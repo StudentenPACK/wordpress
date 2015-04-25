@@ -6,13 +6,6 @@
 get_header(); ?>
 
 <div class="box">
-<?php
-	//Anzeige aller Posts auf einer Seite
-	$parameters = ($wp_query->query_vars);
-    $parameters['nopaging'] = true;
-    $wp_query= new WP_Query($parameters);
-	$posts=get_posts($parameters);
-?>
 	<h1 class="page_title">Heftarchiv 
 		<?php echo '<a href="'.get_category_feed_link(get_query_var('cat')).'"><img src="'.get_bloginfo('template_directory').'/images/rss.png" alt=""/></a>';
 		?>

@@ -6,17 +6,6 @@ get_header(); ?>
 
 <div class="box">
 <?php 
-//zusätzlich den post type comic berücksichtigen
-$parameters = ($wp_query->query_vars);
-$parameters['post_type'] = array('comic','post');
-//alles auf einer Seite anzeigen
-$parameters['nopaging'] = true;
-if(is_author()){
-//aus irgendwelchen Gründen funktioniert das mit den Coautoren nur richtig, wenn dieses Feld leer ist
-	$parameters['author_name'] = '';
-}
-//mit den modifizierten Parametern noch mal die Datenbankabfrage machen
-query_posts($parameters);
 if (have_posts()) : ?>
 <div class="archive_list">
 	<?php 
@@ -147,12 +136,7 @@ if (have_posts()) : ?>
 	}
 	echo '<div class="sidebar-section">';
 		//Alle Archive zeigen ein paar allgemeine Statistiken an
-    	//diese zusätzliche Abfrage stammt aus zeiten, als Archive noch in Seiten unterteilt waren und die Statistiken sonst nur für die erste Seite berechnet wurden, kann eventuell weg...
-		$parameters = ($wp_query->query_vars);
-    	$parameters['post_type'] = array('comic','post');
-		$parameters['nopaging'] = true;
-       	$myquery= new WP_Query($parameters);
-       	$posts=$myquery->posts;	
+       	$posts=$wp_query->posts;	
 		echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/stats16px.png" alt="statistik"/> '.' Statistik</h2>';
 		//Anzahl der Artikel in diesem Archiv
 		echo '<p class="smalltext">';

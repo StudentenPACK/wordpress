@@ -6,16 +6,6 @@ get_header(); ?>
 <div id="frontpage_content_top">
 	<div id="frontpage_news">
 		<?php
-		//Als erstes werden aktuelle Artikel aus allen Kategorien angezeigt
-		$parameters = ($wp_query->query_vars);
-		//Comics einbeziehen
-		$parameters['post_type'] = array('comic','post');
-		//Die Kategorie Blog enthält Heftankündigungen etc und wird gesondert dargestellt
-		$parameters['cat'] = -104;
-		//Diese Zahl modifizieren, falls was am Layout geändert wird und mehr oder weniger Platz ist
-		$parameters['posts_per_page'] = 9;
-		query_posts($parameters);
-
 		if (have_posts()) :
 			$loopcounter = 0;
 			while (have_posts()) : the_post(); $loopcounter++;

@@ -6,14 +6,6 @@
 get_header(); ?>
 
 <div class="box">
-<?php
-	//Alles auf einer Seite anziegen
-	$parameters = ($wp_query->query_vars);
-    $parameters['nopaging'] = true;
-    //nicht die Hefte der Unterkategorie Bauchpresse anzeigen (hier muss ergänzt werden, falls es irgendwann den Springenden Punkt gibt)
-    $parameters['category__not_in'] = array(524, 896, 897, 898, 937, 948);
-    $wp_query= new WP_Query($parameters);
-?>
 <?php if (have_posts()) : ?>
 	<h1 class="page_title">Heftarchiv 
 		<?php echo '<a href="'.get_category_feed_link(get_query_var('cat')).'"><img src="'.get_bloginfo('template_directory').'/images/rss.png" alt=""/></a>';
@@ -76,23 +68,23 @@ get_header(); ?>
 	<h2 class="smallarticle_title">Interesse an unseren Vorgängern?</h2>
 	<div class="gallery_element"> 
 		<h2 class="smalltitle">1967 – 1968: Das Provisorium</h2> 
-		<a href="<?php echo get_category_link(898); ?>"><img src="http://www.studentenpack.uni-luebeck.de/wordpress/wp-content/uploads/2014/07/provisorium1_1967_12_300.jpg"/></a> 
+		<a href="<?php echo get_category_link(898); ?>"><img src="/wordpress/wp-content/uploads/2014/07/provisorium1_1967_12_300.jpg"/></a> 
 	</div> 
 	<div class="gallery_element"> 
 		<h2 class="smalltitle">1975 – 1990: Der Springende Punkt</h2> 
-		<a href="<?php echo get_category_link(896); ?>"><img src="http://www.studentenpack.uni-luebeck.de/wordpress/wp-content/uploads/2014/06/SpriPu06_1976_02_cover_211x300.png"/></a> 
+		<a href="<?php echo get_category_link(896); ?>"><img src="/wordpress/wp-content/uploads/2014/06/SpriPu06_1976_02_cover_211x300.png"/></a> 
 	</div> 
 	<div class="gallery_element"> 
 		<h2 class="smalltitle">1983: Das Hörrohr</h2> 
-		<a href="<?php echo get_category_link(897); ?>"><img src="http://www.studentenpack.uni-luebeck.de/wordpress/wp-content/uploads/2014/06/hoerrohr_6_cover_211x300.png"/></a> 
+		<a href="<?php echo get_category_link(897); ?>"><img src="/wordpress/wp-content/uploads/2014/06/hoerrohr_6_cover_211x300.png"/></a> 
 	</div> 
 	<div class="gallery_element">
 		<h2 class="smalltitle">1993 – 2002: Die Bauchpresse</h2>
-		<a href="<?php echo get_category_link(524); ?>"><img src="http://www.studentenpack.uni-luebeck.de/wordpress/wp-content/uploads/2012/10/bp1-211x300.jpg"/></a>
+		<a href="<?php echo get_category_link(524); ?>"><img src="/wordpress/wp-content/uploads/2012/10/bp1-211x300.jpg"/></a>
 	</div> 
 	<div class="gallery_element"> 
 		<h2 class="smalltitle">1998 – 2002: MUFtI</h2> 
-		<a href="<?php echo get_category_link(937); ?>"><img src="http://www.studentenpack.uni-luebeck.de/wordpress/wp-content/uploads/1967/12/Mufti-1998-02_300.jpg"/></a> 
+		<a href="<?php echo get_category_link(937); ?>"><img src="/wordpress/wp-content/uploads/1967/12/Mufti-1998-02_300.jpg"/></a> 
 	</div>
 <?php else: ?>
 

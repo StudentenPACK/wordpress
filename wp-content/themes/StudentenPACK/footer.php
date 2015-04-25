@@ -60,7 +60,7 @@
 
 
 <div id="footer">
-<p class="smalltext colorscheme_navi"><a href="http://www.studentenpack.uni-luebeck.de/index.php/impressum/">Impressum</a> | <a href="http://www.studentenpack.uni-luebeck.de/index.php/kudos/">Kudos</a> | <?php wp_loginout(); ?> <?php wp_register(' | ', ''); ?></p>
+<p class="smalltext colorscheme_navi"><a href="/index.php/impressum/">Impressum</a> | <a href="/index.php/kudos/">Kudos</a> | <?php wp_loginout(); ?> <?php wp_register(' | ', ''); ?></p>
 </div>
 <?php wp_footer(); ?>
 </div><?php // das ist das Ende von div id="container" ?>
