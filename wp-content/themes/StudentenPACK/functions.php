@@ -351,6 +351,23 @@ function alter_query($query) {
 }
 add_action('pre_get_posts','alter_query');
 
+//custom templates zuordnen
+//http://digitalize.ca/2009/06/wordpress-tip-using-the-same-template-across-multiple-category-tag-and-author-pages/
+function my_category_template( $template ) {
+	//comic archive
+	if( is_category( array( 'hente','ulc','peter-und-harry','audimieze') ) ) {
+		$template = locate_template( array( '_template-comic-archive.php', 'category.php' ) );
+	} 
+	//alte hefte
+	elseif (is_category(array('provisorium','derspringendepunkt','horrohr','bauchpresse','mufti','other'))) {
+		$template = locate_template( array( '_template-old-magazine-archive.php', 'category.php' ) );		
+	}
+	return $template;
+}
+add_filter( 'category_template', 'my_category_template' );
+// I believe *_template hooks exist for just about every type of template so it's easy to apply to other templates as well
+
+
 /**
  * Irgendwas mit Kommentaren. Bestimmt wichtig... olol.
  */
