@@ -241,7 +241,7 @@ function printAuthorProfile($id, $role, $date){
 	echo get_the_author_meta('display_name', $id);
 	//Email, wenn es eine StudentenPACK Adresse ist
 	$email = get_the_author_meta('user_email',$id);
-	if(preg_match('/@studentenpack.uni-luebeck.de/', $email)){
+	if(preg_match_packmail($email)){
 		echo '&nbsp;<a href="mailto:'.$email.'"><img src="'.get_bloginfo('template_directory').'/images/email16px.png" alt="email" /></a>';
 	} else {
 		//hier ist ein unsichtbares Dummy-Icon, damit sich die Textausrichtung nicht verschiebt, nur weil jemand keine Emailadresse hat...
@@ -393,6 +393,13 @@ function sidebar_comment($comment, $args, $depth) {
      	</div>
 <?php
 	//schließedes </li> wird automatisch ergänzt
+}
+
+/**
+ * erkennt, ob eine Emailadresse zum StudentenPACK gehört und damit veröffentlicht werden darf.
+ */
+function preg_match_packmail($string) {
+	return preg_match('/.*@studentenpack(\.uni-luebeck)?\.de/', $string);
 }
 
 

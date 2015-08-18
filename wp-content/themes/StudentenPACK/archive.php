@@ -94,7 +94,8 @@ if (have_posts()) : ?>
 			
 		}
 		//Autoren, die eine StudentenPACK-Emailadresse haben, zeigen diese an
-		if (preg_match('/@studentenpack.uni-luebeck.de/', get_the_author_meta('user_email', get_query_var('author')))){
+		$email = get_the_author_meta('user_email', get_query_var('author'));
+		if (preg_match_packmail($email)) {
 			echo '<div class="sidebar-section">';
 			echo '<h2 class="smalltitle">'.'<img src="'.get_bloginfo('template_directory').'/images/email16px.png" alt="email"/> '.' Kontakt</h2>';
 			echo '<p class="smalltext">';
