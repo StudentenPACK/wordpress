@@ -71,7 +71,11 @@ while (have_posts()) : the_post(); ?>
 				print $authors->count() == 1 ? 'Der Autor' : 'Die Autoren';
 			?>
 		</h2>
-		<p class="smalltext"><?php coauthors_posts_links('<br/>&raquo; ','<br/>&raquo; ','&raquo; ',''); ?></p>
+		<ul class="smalltext authors">
+			<?php 
+				coauthors_posts_links('</li><li>','</li><li>','<li>','</li>'); 
+			?>
+		</ul>
 	</div>
 	<div class="sidebar-section">
 		<h2 class="smalltitle"><?php echo '<img src="'.get_bloginfo('template_directory').'/images/calendar16px.png" alt="kalender"/> '; ?>Datum</h2>

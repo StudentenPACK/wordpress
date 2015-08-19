@@ -823,6 +823,16 @@ p.page_modified{
 	line-height:1.4em;
 }
 
+.sidebar-section ul.authors {
+	list-style: none;
+	padding-left: 0px;
+}
+
+.sidebar-section ul.authors li:before {
+	content: "\00BB";
+	margin-right: 4px;
+}
+
 
 /**
  * Allgemeine Elemente, die immer mal wieder verwendet werden
