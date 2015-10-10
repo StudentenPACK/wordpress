@@ -86,6 +86,21 @@ while (have_posts()) : the_post(); ?>
 			echo '<a href="'.get_month_link(get_the_time('Y'), get_the_time('n')).'">&raquo; zum Monats-Archiv</a></p>';
 		?>
 	</div>
+	<div class="sidebar-section">
+		<h2 class="smalltitle"><?php echo '<img src="'.get_bloginfo('template_directory').'/images/author16px.png" alt="kalender"/> '; ?>Lizenz</h2>
+		<?php
+		$mykey_values = get_post_custom_values('Lizenz');
+		if (empty($mykey_values)) :
+			echo '<p class="smalltext">Copyright StudentenPACK '.get_the_time('Y').'.</p>';
+		endif;
+		if ($mykey_values[0] == 'ccbyncsa') :
+			echo '<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>';
+		endif;
+		if($mykey_values[0] == 'ccbync') :
+			echo '<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a>';
+		endif;
+		?>	
+	</div>
 	<?php 
 		//ist dies ein reiner Onlineartikel (ansonsten war er in einem Heft)
 		$mykey_values = get_post_custom_values('OnlineOnly');
@@ -127,6 +142,7 @@ while (have_posts()) : the_post(); ?>
    		//loop wieder herstellen
 		$wp_query = $tmp;
 	endif; ?>
+
 	<div class="sidebar-section">
 		<h2 class="smalltitle"><?php echo '<img src="'.get_bloginfo('template_directory').'/images/share16px.png" alt="share"/> ';?>Mundpropaganda</h2>
 		<!--<p class="smalltext"><a href="<?php trackback_url(); ?>">Trackback-URL</a></p>-->
