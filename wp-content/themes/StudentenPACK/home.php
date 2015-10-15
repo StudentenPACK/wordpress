@@ -21,6 +21,20 @@ get_header(); ?>
 						<?php
 							//Zweittitel oder Excerpt ...edit: Lukas will das so.
 							$mykey_values = get_post_custom_values('Untertitel');
+							if(!empty($_GET["lang"]) && $_GET["lang"] != "de"){
+								$mykey_values = get_post_custom_values('Untertitel_'+$_GET["lang"]);
+			
+								//a language has been chosen but does not exist, default to english
+								if(empty($mykey_values)) {
+									$mykey_values = get_post_custom_values('Untertitel_en');
+				
+									//and if it still is empty, german will do...
+									if(empty($mykey_values)) {
+										$mykey_values = get_post_custom_values('Untertitel');
+									}
+								}
+							}
+
 							if (!empty($mykey_values)){
   					 			foreach ( $mykey_values as $key => $value ) {
   					 				//echo ($value); 
