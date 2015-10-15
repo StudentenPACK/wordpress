@@ -10,7 +10,21 @@ while (have_posts()) : the_post(); ?>
 <div class="article fulltext">
 	<?php
 		//Zweittitel
+		
 		$mykey_values = get_post_custom_values('Untertitel');
+		if(!empty($_GET["lang"]) && $_GET["lang"] != "de"){
+			$mykey_values = get_post_custom_values('Untertitel_'+$_GET["lang"]);
+			
+			//a language has been chosen but does not exist, default to english
+			if(empty($mykey_values)) {
+				$mykey_values = get_post_custom_values('Untertitel_en');
+				
+				//and if it still is empty, german will do...
+				if(empty($mykey_values)) {
+					$mykey_values = get_post_custom_values('Untertitel');
+				}
+			}
+		}
 		//Heftarchiv Posts haben Links zum Wechseln zwischen aufeinanderfolgenden Ausgaben
 		$in_heftarchiv = in_category(array(105, 524));
 		if($in_heftarchiv){
