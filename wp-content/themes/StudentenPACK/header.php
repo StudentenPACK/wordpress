@@ -25,7 +25,7 @@
 	//Zeitzone und Sommerzeit-Sensitivität aktivieren
 	date_default_timezone_set('Europe/Berlin');
 	//JQuery, eventuell mal neuere Version benutzen. Aber ist eigentlich auch mal egal, so wenig wie davon benutzt wird ?>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 
 <body <?php body_class(); ?>>
