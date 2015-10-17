@@ -5,6 +5,17 @@
 get_header(); ?>
 <div id="frontpage_content_top">
 	<div id="frontpage_news">
+		
+		<?php
+		//banner
+		$showbannerbig=false;
+		if($showbannerbig) { 
+			echo '<a href="http://www.studentenpack.de/index.php/tag/filmtagebuch/"><img src="'.get_bloginfo('template_directory').'/images/NFL.jpg" width="637" alt="Nordische Filmtage"/></a> ';
+			echo '</br>';
+			echo '</br>';
+		}
+		?>
+
 		<?php
 		if (have_posts()) :
 			$loopcounter = 0;
@@ -107,7 +118,21 @@ get_header(); ?>
 		rewind_posts(); ?>
 	</div>
 	<div id="frontpage_sidebar">
+
+		<?php
+		//banner 
+		$showbannersmall=false;
+		if($showbannersmall) { 
+			echo '<div class="sidebar-section">';
+			echo '<a href="http://www.studentenpack.de/index.php/tag/filmtagebuch/"><img src="'.get_bloginfo('template_directory').'/images/NFL.jpg" width="325" alt="Nordische Filmtage"/></a> ';
+			echo '</br>';
+			echo '</br>';
+			echo '</div>';
+		}
+		?>
+
 		<div class="sidebar-section">
+
 			<?php 
 				//Wenn bereits ein Erscheinungsdatum für die nächste Ausgabe feststeht und ein vorläufiger Post angelegt wurde,
 				//wird hier das Datum angezeigt angezeigt

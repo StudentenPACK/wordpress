@@ -163,9 +163,13 @@ while (have_posts()) : the_post(); ?>
 		<p class="sharebuttons">
 		<?php 
 			//Social Media Buttons (gegen Deaktivierung der Plugins absichern)
+			if(function_exists('get_twoclick_buttons')) {
+				get_twoclick_buttons(get_the_ID());
+			}
+			//keeping the old code here just in case the new plugin sux.
 			//sfc_share_button(); 
-			echo '&nbsp;';
-			stc_tweetbutton();
+			//echo '&nbsp;';
+			//stc_tweetbutton();
 		?>
 		</p>
 	</div>
