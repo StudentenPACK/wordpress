@@ -5,6 +5,17 @@
 get_header(); ?>
 <div id="frontpage_content_top">
 	<div id="frontpage_news">
+		
+		<?php
+		//banner
+		$showbannerbig=false;
+		if($showbannerbig) { 
+			echo '<a href="http://www.studentenpack.de/index.php/tag/filmtagebuch/"><img src="'.get_bloginfo('template_directory').'/images/NFL.jpg" width="637" alt="Nordische Filmtage"/></a> ';
+			echo '</br>';
+			echo '</br>';
+		}
+		?>
+
 		<?php
 		if (have_posts()) :
 			$loopcounter = 0;
@@ -21,6 +32,20 @@ get_header(); ?>
 						<?php
 							//Zweittitel oder Excerpt ...edit: Lukas will das so.
 							$mykey_values = get_post_custom_values('Untertitel');
+							if(!empty($_GET["lang"]) && $_GET["lang"] != "de"){
+								$mykey_values = get_post_custom_values('Untertitel_'+$_GET["lang"]);
+			
+								//a language has been chosen but does not exist, default to english
+								if(empty($mykey_values)) {
+									$mykey_values = get_post_custom_values('Untertitel_en');
+				
+									//and if it still is empty, german will do...
+									if(empty($mykey_values)) {
+										$mykey_values = get_post_custom_values('Untertitel');
+									}
+								}
+							}
+
 							if (!empty($mykey_values)){
   					 			foreach ( $mykey_values as $key => $value ) {
   					 				//echo ($value); 
@@ -93,7 +118,21 @@ get_header(); ?>
 		rewind_posts(); ?>
 	</div>
 	<div id="frontpage_sidebar">
+
+		<?php
+		//banner 
+		$showbannersmall=false;
+		if($showbannersmall) { 
+			echo '<div class="sidebar-section">';
+			echo '<a href="http://www.studentenpack.de/index.php/tag/filmtagebuch/"><img src="'.get_bloginfo('template_directory').'/images/NFL.jpg" width="325" alt="Nordische Filmtage"/></a> ';
+			echo '</br>';
+			echo '</br>';
+			echo '</div>';
+		}
+		?>
+
 		<div class="sidebar-section">
+
 			<?php 
 				//Wenn bereits ein Erscheinungsdatum für die nächste Ausgabe feststeht und ein vorläufiger Post angelegt wurde,
 				//wird hier das Datum angezeigt angezeigt
