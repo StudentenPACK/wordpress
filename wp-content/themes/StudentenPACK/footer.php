@@ -56,6 +56,11 @@
 			$('#sitemap_hidden').show();
 		});
 	</script>
+	<script>
+		window.setC = function(e) {
+			
+		}
+	</script>
 </div>
 
 
