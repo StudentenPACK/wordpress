@@ -273,7 +273,7 @@ function printAuthorProfile($id, $role, $date){
 
 /**
  * Ööhhh..kein Plan, das stand wahrscheinlich mal irgendwo im Supportforum zum Mediacredit Plugin, das sowieso total im Eimer ist...
- */
+
 add_shortcode('caption', 'img_caption_shortcode_mediacredit');
 function img_caption_shortcode_mediacredit($attr, $content = null) {
     // New-style shortcode with the caption inside the shortcode with the link and image tags.
@@ -304,6 +304,7 @@ function img_caption_shortcode_mediacredit($attr, $content = null) {
     return '<div ' . $id . 'class="wp-caption ' . esc_attr($align) . '" style="width: ' . (10 + (int) $width) . 'px">'
     . do_shortcode( $content ) . '<p class="wp-caption-text">' . do_shortcode( $caption ) . '</p></div>'; 
 }
+ */
 
 /**
  * Suchergebnisse bekommen 20 Artikel auf eine Seite.
