@@ -103,6 +103,7 @@ while (have_posts()) : the_post(); ?>
 	<div class="sidebar-section">
 		<h2 class="smalltitle"><?php echo '<img src="'.get_bloginfo('template_directory').'/images/author16px.png" alt="kalender"/> '; ?>Lizenz</h2>
 		<?php
+		echo '<p class="smalltext">Dieser Text ist lizensiert unter:</p>';
 		$mykey_values = get_post_custom_values('Lizenz');
 		if (empty($mykey_values)) :
 			echo '<p class="smalltext">Copyright StudentenPACK '.get_the_time('Y').'.</p>';
