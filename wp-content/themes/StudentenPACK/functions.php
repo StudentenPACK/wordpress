@@ -6,12 +6,12 @@
 /**
  * eine Reihe von Größen für Artikelbilder festlegen
  */
-if ( function_exists( 'add_theme_support' ) ) { 
+if ( function_exists( 'add_theme_support' ) ) {
   add_theme_support( 'post-thumbnails' );
   //existierendes Maß thumbnail umdefinieren
   set_post_thumbnail_size( 150, 100, true );
   //featured-post wird für die Titelstory auf der Startseite und für die Comicübersich verwendet
-  add_image_size( 'featured-post', 636, 300, true ); 
+  add_image_size( 'featured-post', 636, 300, true );
   //Standardgröße für Listen
   add_image_size( 'std-post', 150, 100, true );
   //Kleine Heftcover für Sidebar und Heftarchiv. Man beachte das fehlende "true", es wird also nicht scharf zugeschnitten
@@ -27,7 +27,7 @@ if ( function_exists( 'add_theme_support' ) ) {
  */
 add_filter('excerpt_length', 'my_excerpt_length');
 function my_excerpt_length($length) {
-	return 20; 
+	return 20;
 }
 
 /**
@@ -57,11 +57,11 @@ register_sidebar(array(
 ));
 
 /**
- * ausgehend von einer gegebenen Kategorie die Hauptkategorie bestimmen. 
+ * ausgehend von einer gegebenen Kategorie die Hauptkategorie bestimmen.
  */
 function get_root_category($tmp)
 {
-	$tmproot = $tmp[0]->category_parent; 
+	$tmproot = $tmp[0]->category_parent;
 	while ($tmproot != 0) {
 		$tmp = get_category($tmproot);
 		$tmproot = $tmp->category_parent;
@@ -74,14 +74,14 @@ function get_root_category($tmp)
  * http://www.sajithmr.me/php-time-ago-calculation
  */
 function TimeAgo($datefrom,$dateto=-1)
-{	
+{
 	// Defaults and assume if 0 is passed in that
 	// its an error rather than the epoch
 
 	if($datefrom<=0) { return "A long time ago"; }
-	if($dateto==-1) { 
+	if($dateto==-1) {
 		//Zeitzone und Sommerzeit-Sensitivität aktivieren
-		date_default_timezone_set('Europe/Berlin'); 
+		date_default_timezone_set('Europe/Berlin');
 		$dateto = date('U'); }
 
 	// Calculate the difference in seconds betweeen
@@ -173,7 +173,7 @@ function TimeAgo($datefrom,$dateto=-1)
 			{
 				$datediff--;
 			}
-	
+
 			$res = ($datediff==1) ? "vor einem Monat" : "vor $datediff Monaten";
 			break;
 
@@ -186,7 +186,7 @@ function TimeAgo($datefrom,$dateto=-1)
 			$datediff = floor($difference / 60 / 60 / 24);
 			$res = ($datediff==1) ? "gestern" : "vor $datediff Tagen";
 			break;
-	
+
 		case "ww":
 			$datediff = floor($difference / 60 / 60 / 24 / 7);
 			$res = ($datediff==1) ? "letzte Woche" : "vor $datediff Wochen";
@@ -239,9 +239,9 @@ function printAuthorProfile($id, $role, $date){
 	//alle "auf einer Seite" (werden hier nicht angezeigt, nur gezählt)
 	$parameters['nopaging'] = true;
 	$myquery= new WP_Query($parameters);
-    $posts=$myquery->posts;	
+    $posts=$myquery->posts;
     //das gleiche noch mal für Comics
-	$parameters['post_type'] = array('comic');    
+	$parameters['post_type'] = array('comic');
 	$myquery= new WP_Query($parameters);
 	$comics=$myquery->posts;
 	echo '<div class="gallery_element">';
@@ -311,7 +311,7 @@ function img_caption_shortcode_mediacredit($attr, $content = null) {
     if ( $id ) $id = 'id="' . esc_attr($id) . '" ';
 
     return '<div ' . $id . 'class="wp-caption ' . esc_attr($align) . '" style="width: ' . (10 + (int) $width) . 'px">'
-    . do_shortcode( $content ) . '<p class="wp-caption-text">' . do_shortcode( $caption ) . '</p></div>'; 
+    . do_shortcode( $content ) . '<p class="wp-caption-text">' . do_shortcode( $caption ) . '</p></div>';
 }
  */
 
@@ -367,10 +367,10 @@ function my_category_template( $template ) {
 	//comic archive
 	if( is_category( array( 'hente','ulc','peter-und-harry','audimieze') ) ) {
 		$template = locate_template( array( '_template-comic-archive.php', 'category.php' ) );
-	} 
+	}
 	//alte hefte
 	elseif (is_category(array('provisorium','derspringendepunkt','horrohr','campushl', 'bauchpresse','mufti','other'))) {
-		$template = locate_template( array( '_template-old-magazine-archive.php', 'category.php' ) );		
+		$template = locate_template( array( '_template-old-magazine-archive.php', 'category.php' ) );
 	}
 	return $template;
 }
@@ -386,7 +386,7 @@ function sidebar_comment($comment, $args, $depth) {
 	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID() ?>">
    		<div id="comment-<?php comment_ID(); ?>">
     		<div class="comment-author avatar">
-        		<?php echo get_avatar($comment,$size='32',$default='<path_to_url>' ); ?>
+        		<?php echo get_avatar($comment,$size='32',$default='retro' ); ?>
         	</div>
         	<div class="comment-body smalltext">
        		<p class="comment-text"><strong><?php echo get_comment_author_link(); ?>:</strong> <?php echo nl2br(get_comment_text()) ?>
@@ -396,7 +396,7 @@ function sidebar_comment($comment, $args, $depth) {
       			<?php endif; ?>
        		</p>
       		<p class="comment-meta commentmetadata">
-      			<a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php printf(__('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','') ?> 
+      			<a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>"><?php printf(__('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','') ?>
       			| <?php comment_reply_link(array_merge( $args, array('depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
       		</p>
       		</div>
