@@ -31,6 +31,15 @@ function my_excerpt_length($length) {
 }
 
 /**
+ * Es gab ein Problem mit dem hochladen von Bildern.
+ * Laut diesem Post ist dies eine Option: https://wordpress.org/support/topic/http-error-when-uploading-images-17
+ */
+add_filter( 'wp_image_editors', 'change_graphic_lib' );
+
+function change_graphic_lib($array) {
+	return array( 'WP_Image_Editor_GD', 'WP_Image_Editor_Imagick' );
+}
+/**
  * Keine automatischen Absätze (<p>) in Excerpts
  */
 remove_filter('the_excerpt', 'wpautop');
@@ -341,7 +350,7 @@ function alter_query($query) {
 			$query-> set('nopaging', true);
 			if(is_category('heftarchiv')) {
 				//im Haupt-Heftarchiv nicht die Hefte in den Unterkategorien anzeigen
-				$query->set('category__not_in', array(524, 896, 897, 898, 937, 948));
+				$query->set('category__not_in', array(524, 896, 897, 898, 937, 948, 1146));
 			}
 		}
 
@@ -360,7 +369,7 @@ function my_category_template( $template ) {
 		$template = locate_template( array( '_template-comic-archive.php', 'category.php' ) );
 	} 
 	//alte hefte
-	elseif (is_category(array('provisorium','derspringendepunkt','horrohr','bauchpresse','mufti','other'))) {
+	elseif (is_category(array('provisorium','derspringendepunkt','horrohr','campushl', 'bauchpresse','mufti','other'))) {
 		$template = locate_template( array( '_template-old-magazine-archive.php', 'category.php' ) );		
 	}
 	return $template;
@@ -380,7 +389,7 @@ function sidebar_comment($comment, $args, $depth) {
         		<?php echo get_avatar($comment,$size='32',$default='<path_to_url>' ); ?>
         	</div>
         	<div class="comment-body smalltext">
-       		<p class="comment-text"><?php echo get_comment_author_link(); ?>: <?php echo get_comment_text() ?>
+       		<p class="comment-text"><strong><?php echo get_comment_author_link(); ?>:</strong> <?php echo nl2br(get_comment_text()) ?>
        			<?php if ($comment->comment_approved == '0') : ?>
            		<br />
          		<em><?php _e('Your comment is awaiting moderation.') ?></em>
