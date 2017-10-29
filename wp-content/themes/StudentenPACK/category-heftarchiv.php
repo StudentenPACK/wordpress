@@ -37,9 +37,12 @@ get_header(); ?>
 		echo '<a href="'.get_category_link(524).'">Die Bauchpresse (1993 – 2002)</a>';
 		echo ' &middot ';
 		echo '<a href="'.get_category_link(937).'">MUFtI (1998 – 2002)</a>';
+		echo ' &middot ';
 		echo '<br>';
 		echo ' &middot ';
-		echo '<a href="'.get_category_link(948).'">Weitere studentische Publikationen (1964 – 2014)</a>';
+		echo '<a href="'.get_category_link(1146).'">Campus HL (2013 – 2016)</a>';
+		echo ' &middot ';
+		echo '<a href="'.get_category_link(948).'">Weitere studentische Publikationen</a>';
 		echo ' &middot ';
 		echo '</p>'; ?>
 	<div class="gallery">
@@ -65,7 +68,7 @@ get_header(); ?>
 
 	//noch mal ein prominenter Hinweis auf unsere Vorgänger. Ergänzen, wenn der Springende Punkt online geht!
 	?>
-	<h2 class="smallarticle_title">Interesse an unseren Vorgängern?</h2>
+	<h2 class="smallarticle_title">Interesse an andren Studentenzeitungen aus Lübeck?</h2>
 	<div class="gallery_element"> 
 		<h2 class="smalltitle">1967 – 1968: Das Provisorium</h2> 
 		<a href="<?php echo get_category_link(898); ?>"><img src="/wordpress/wp-content/uploads/2014/07/provisorium1_1967_12_300.jpg"/></a> 
@@ -85,6 +88,10 @@ get_header(); ?>
 	<div class="gallery_element"> 
 		<h2 class="smalltitle">1998 – 2002: MUFtI</h2> 
 		<a href="<?php echo get_category_link(937); ?>"><img src="/wordpress/wp-content/uploads/1967/12/Mufti-1998-02_300.jpg"/></a> 
+	</div>
+	<div class="gallery_element"> 
+		<h2 class="smalltitle">2013 - 2016: Campus HL</h2> 
+		<a href="<?php echo get_category_link(1146); ?>"><img src="/wordpress/wp-content/uploads/1967/12/Mufti-1998-02_300.jpg"/></a> 
 	</div>
 <?php else: ?>
 

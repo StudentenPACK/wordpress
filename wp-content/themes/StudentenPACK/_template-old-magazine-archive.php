@@ -55,13 +55,17 @@ if (have_posts()) :
 			echo '<a href="'.get_category_link(937).'">MUFtI (1998 – 2002)</a>';
 			echo ' &middot; ';
 		}
+		if ($this_category->cat_ID != 1146) {
+			echo '<a href="'.get_category_link(1146).'">Campus HL (2014 – 2016)</a>';
+			echo ' &middot; ';
+		}
 		//pack immer, weil pack nie mit diesem template angezeigt wird...hoffentlich...
+		echo '<br/>';
 		echo '<a href="'.get_category_link(105).'">Das StudentenPACK (seit 2005)</a>';
 		echo ' &middot; ';
 		if ($this_category->cat_ID != 948) {
-			echo '<br/>';
 			echo ' &middot; ';
-			echo '<a href="'.get_category_link(948).'">Weitere studentische Publikationen (1964 – 2014)</a>';
+			echo '<a href="'.get_category_link(948).'">Weitere studentische Publikationen</a>';
 			echo ' &middot; ';
 		}
 		echo '</p>';

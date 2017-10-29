@@ -20,29 +20,39 @@ get_header(); ?>
 				<div id="redaktion" class="gallery fulltext">
 					<?php 
 						//Aktuelle Redaktionsmitglieder, Chef vorne, Rest alphabetisch
-						printAuthorProfile(80, 'Schreibt über Studium und etwas morbide Themen.<br>Redaktionsleitung<br>2013 - 2014.', '2011 - heute'); //Annika Munko
-						printAuthorProfile(152, 'Schreibt über Lübeck und Geschichte', '2013 - heute'); //Estelle Kleefisch
+						printAuthorProfile(172, 'Fotos, Kolumnen, ViSdP', '2013 - heute'); //Fabian Schwarze
+						printAuthorProfile(226, 'Vertritt Dr. k.c Audimieze', '2014 - heute'); //Henrik Bundt		
 						printAuthorProfile(154, 'Schreibt über den Campus<br>Satz und Design', '2013 - heute'); //Johann Mattutat
-						printAuthorProfile(151, 'Feuilleton', '2013 - heute'); //Birte Ohm
-						printAuthorProfile(51, 'Fotos, Comics und KoMa', '2010 - heute'); //Albert Piek
-						printAuthorProfile(172, 'Fotos und Kolumnen', '2013 - heute'); //Fabian Schwarze
-						printAuthorProfile(84, 'Satz und Design', '2012 - heute'); //Hendrik Wallbaum
-						printAuthorProfile(155, 'Artikel und IT', '2013 - heute'); //Bjarne Witten
+						printAuthorProfile(80, 'Schreibt über Studium und etwas morbide Themen.<br>Redaktionsleitung<br>2013 - 2014.', '2011 - heute'); //Annika Munko
+						printAuthorProfile(51, 'Fotos, KoMa, Technik', '2010 - heute'); //Albert Piek
+						printAuthorProfile(14, 'Beauftragter für investigativen Journalismus, Fotos.', '2008 - heute'); //Lukas Ruge
+
 						printAuthorProfile(138, 'Schreibt über quasi alles', '2013 - heute'); //Johannes Zanken
-						printAuthorProfile(222, 'Neuling :)', '2014 - heute'); //Annika Steinmeier
-						printAuthorProfile(226, 'Neuling :)', '2014 - heute'); //Henrik Bundt
+						printAuthorProfile(281, 'Krawallbeauftragte', '2016 - heute'); //Carlotta Derad
+						printAuthorProfile(282, 'Web und Technik', '2016 - heute'); //Magnus Bender
+						printAuthorProfile(283, 'Neu dabei', '2016 - heute'); //Frederike Heiden
+						printAuthorProfile(286, 'Neu dabei', '2017 - heute'); //Hendrik Brüggemann
+						printAuthorProfile(287, 'Neu dabei', '2017 - heute'); //Clara Trost
+						printAuthorProfile(288, 'Neu dabei', '2017 - heute'); //Marie Sprengell
+						printAuthorProfile(285, 'Neu dabei', '2017 - heute'); //Jana Mest
 					?>
 					<h2 class="smallarticle_title">Ehemalige Redaktionsmitglieder</h2>
 					<?php
 						//ehemalige Redaktionsmitglieder, zuletzt gegangene vorne
-
+						printAuthorProfile(280, 'Kurz dabei', '2016'); //Alena
+						printAuthorProfile(222, 'Kurz dabei', '2014 - 2015'); //Annika Steinmeier
+						printAuthorProfile(250, 'Kurz dabei', '2015'); //Nina Denker
+						printAuthorProfile(251, 'Kurz dabei', '2015'); //Florian Berberich
+						printAuthorProfile(155, 'Artikel und IT', '2013 - 2016'); //Bjarne Witten
+						printAuthorProfile(84, 'Satz und Design', '2012 - 2016'); //Hendrik Wallbaum
+						printAuthorProfile(152, 'Campus und mehr', '2013 - 2016'); //Estelle Kleefisch
+						printAuthorProfile(151, 'Feuilleton', '2013 - 2014'); //Birte Ohm
 						printAuthorProfile(165, 'Fotos, 2014'); //Albina Schütz 
 						printAuthorProfile(69, 'Artikel, Kolumne', '2011 - 2014'); //Frederike Sannman
 						printAuthorProfile(62, 'Fachschaft MINT, Bier und Sächseln', '2011 - 2014'); //Georg Männel
-						printAuthorProfile(164, 'Neuling :)', '2013'); //Hanna Lachnit
+						printAuthorProfile(164, 'Kurz dabei', '2013'); //Hanna Lachnit
 						printAuthorProfile(87, 'Schreibt über Erlebtes und koordiniert unsere Lektoren', '2012 - 2013'); //Julia Füger
-						printAuthorProfile(153, 'Neuling :)', '2013 - 2014'); //Lars Graßhoff
-						printAuthorProfile(14, 'Beauftragter für investigativen Journalismus, Fotos.', '2008 - 2014'); //Lukas Ruge
+						printAuthorProfile(153, 'Kurz dabei', '2013 - 2014'); //Lars Graßhoff
 						printAuthorProfile(16, 'Homepage, Lektorat, Fotos, Grafiken, gelegentlich Artikel', '2009 - 2013'); //Philipp 
 						printAuthorProfile(19, 'Big Boss 2008 bis 2012, AStA, Leseratte', '2006 - 2013'); //Susi 
 						printAuthorProfile(24, 'Artikel am Fließband, Kolumne', '2011 - 2012'); //Sarah 
@@ -69,6 +79,7 @@ get_header(); ?>
 						printAuthorProfile(108, 'AStA', '2010'); //Julien Beck 
 						printAuthorProfile(46, 'StuPa, Diverses, Fotos', '2010 - 2011'); //Dennis Boldt
 						printAuthorProfile(33, 'StuPa', '2010 - 2011'); //Anne Braun 
+						printAuthorProfile(112, 'ASta, Medibüro', '2010 - 2014'); //Eva Claussen
 						printAuthorProfile(141, 'Fachschaft Medizin', '2013 - heute'); //Fabian Dib 
 						printAuthorProfile(67, 'Fachschaften CS|MLS, MINT', '2011 - heute'); //Steffen Drewes
 						printAuthorProfile(91, 'AStA', '2010 - 2012'); //Georg Engelbart

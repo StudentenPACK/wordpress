@@ -54,7 +54,7 @@ get_header(); ?>
 									{
 										echo("<b>");
 										echo ($value);
-										echo("</b>");
+										echo("</b> ");
 										$remain = 100 - $valuelength;
 										$subexcerp = substr(get_the_excerpt(), 0, $remain);
 										echo($subexcerp);
@@ -183,7 +183,7 @@ get_header(); ?>
 			<?php 
 				//echo do_shortcode( '[google_top_content pageviews=1 number=10 showhome=no time=2628000 timeval=1]' );
 				//Liste der meistgelesenen Artikel im letzten Monat (Plugin: WordPress Popular Posts)
-				if (function_exists('wpp_get_mostpopular')) wpp_get_mostpopular("header=Meistgelesen&limit=5&range=monthly&order_by=views&post_type=post,comic&stats_views=1&stats_comments=0");
+				if (function_exists('wpp_get_mostpopular')) wpp_get_mostpopular("header=Meistgelesen&limit=10&range=monthly&order_by=views&post_type=post,comic&stats_views=1&stats_comments=0");
 				//Liste der meistkommentierten Artukel im letzten Monat (Plugin: WordPress Popular Posts)
 				if (function_exists('wpp_get_mostpopular')) wpp_get_mostpopular("header=Meistkommentiert&limit=5&range=monthly&order_by=comments&post_type=post,comic&stats_comments=1&pages=0");
 			?>

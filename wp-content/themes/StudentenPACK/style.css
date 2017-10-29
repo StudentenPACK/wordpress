@@ -472,7 +472,7 @@ input#searchsubmit{
 
 /* der Kolumnen Teaser */
 #frontpage_kolumne{
-	width: 324px;
+	width: 1024px;
 	display: inline-block;
 	vertical-align: top;
 	margin-top: 10px;

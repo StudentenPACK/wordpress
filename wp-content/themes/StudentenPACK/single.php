@@ -108,6 +108,9 @@ while (have_posts()) : the_post(); ?>
 		if (empty($mykey_values)) :
 			echo '<p class="smalltext">Copyright StudentenPACK '.get_the_time('Y').'.</p>';
 		endif;
+		if ($mykey_values[0] == 'campushl') :
+			echo '<p class="smalltext">Copyright Campus-HL '.get_the_time('Y').'.</p>';
+		endif;
 		if ($mykey_values[0] == 'ccbyncsa') :
 			echo '<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>';
 		endif;
