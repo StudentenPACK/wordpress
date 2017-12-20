@@ -47,7 +47,7 @@ while (have_posts()) : the_post(); ?>
 
 			//sfc_share_button(); 
 			//echo '&nbsp;';
-			stc_tweetbutton();
+			//stc_tweetbutton();
 
 		//Kommentare
 		comments_template( '', true ); ?>
