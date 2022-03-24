@@ -133,7 +133,7 @@ get_header(); ?>
 
 		<div class="sidebar-section">
 
-			<?php 
+			<!-- <?php 
 				//Wenn bereits ein Erscheinungsdatum für die nächste Ausgabe feststeht und ein vorläufiger Post angelegt wurde,
 				//wird hier das Datum angezeigt angezeigt
 				//frage noch nicht erschienene Posts der Kategorie Heftarchiv ab
@@ -153,7 +153,7 @@ get_header(); ?>
 				echo '<a href="'.get_page_link(111926).'">Gastartikel einsenden</a>';
 				echo '</h2>';
 			?>
-		</div>
+		</div> -->
 		<h2 class="smalltitle contentarea"><?php echo '<img src="'.get_bloginfo('template_directory').'/images/blog16px.png" alt="blog"/> ';?> <a href="<?php echo(get_category_link(104));?>">In eigener Sache</a></h2>
 		<div class="sidebar-section">
 			<?php 
