@@ -55,9 +55,9 @@ while (have_posts()) : the_post(); ?>
 		<?php 
 		//Inhalt
 		the_content(); ?>
-		<p class="interaction_box"><a href="#comments"><?php 
+		<!-- <p class="interaction_box"><a href="#comments"><?php 
 		//Link zur Kommentarfunktion
-		comments_number('Noch keine Kommentare, sei der Erste!', 'Jemand hat die Diskussion eröffnet, mach mit!', 'Schon % Kommentare, hast auch du eine Meinung zu diesem Artikel?' );?></a></p>
+		comments_number('Noch keine Kommentare, sei der Erste!', 'Jemand hat die Diskussion eröffnet, mach mit!', 'Schon % Kommentare, hast auch du eine Meinung zu diesem Artikel?' );?></a></p> -->
 	</div>
 </div>
 

@@ -17,4 +17,4 @@ if ( have_comments() ) : ?>
 	else : // comments are closed
 	endif;
 endif;?>
-<?php comment_form(array(title_reply => '', comment_notes_after => '')); ?> 
+<!-- <?php comment_form(array(title_reply => '', comment_notes_after => '')); ?>  -->
