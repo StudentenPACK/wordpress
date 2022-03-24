@@ -178,7 +178,7 @@ get_header(); ?>
 			rewind_posts();
 			wp_reset_query(); ?>
 		</div>
-		<h2 class="smalltitle"><?php echo '<img src="'.get_bloginfo('template_directory').'/images/comments16px.png" alt="kommentar"/> ';?> Diesen Monat Heiß &amp; Fettig</h2>
+		<!-- <h2 class="smalltitle"><?php echo '<img src="'.get_bloginfo('template_directory').'/images/comments16px.png" alt="kommentar"/> ';?> Diesen Monat Heiß &amp; Fettig</h2>
 		<div class="sidebar-section smalltext colorscheme_navi" id="sidebar-popularposts">
 			<?php 
 				//echo do_shortcode( '[google_top_content pageviews=1 number=10 showhome=no time=2628000 timeval=1]' );
@@ -187,7 +187,7 @@ get_header(); ?>
 				//Liste der meistkommentierten Artukel im letzten Monat (Plugin: WordPress Popular Posts)
 				if (function_exists('wpp_get_mostpopular')) wpp_get_mostpopular("header=Meistkommentiert&limit=5&range=monthly&order_by=comments&post_type=post,comic&stats_comments=1&pages=0");
 			?>
-		</div>
+		</div> -->
 		
 		
 		<div class="sidebar-section">
