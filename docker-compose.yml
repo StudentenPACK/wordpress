@@ -13,6 +13,7 @@ services:
       - ./wp-content/plugins/studentenpack_posttypes.php:/var/www/html/wp-content/plugins/studentenpack_posttypes.php
       - ./wp-content/plugins/studentenpack_widgets.php:/var/www/html/wp-content/plugins/studentenpack_widgets.php
       - ./wp-content/themes/StudentenPACK:/var/www/html/wp-content/themes/StudentenPACK/
+      - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
     depends_on:
       - db
 
