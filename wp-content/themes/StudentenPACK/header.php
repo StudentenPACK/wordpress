@@ -89,7 +89,7 @@
 					echo('</div>');
 				}
 			?>
-			<div><li id="search"><?php get_search_form(); ?></li></div>
+			<!-- <div><li id="search"><?php get_search_form(); ?></li></div> -->
 		</ul>
 	</div>
 </div>
